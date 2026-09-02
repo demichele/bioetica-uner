@@ -123,9 +123,33 @@
   .s2 h2 { font-size: 4.8vh; }
   .s2 .sub { margin-top: 1vh; color: var(--acc); font-weight: 600; font-size: 1.9vh; }
 
-  /* 3 video note — top, not over faces/center */
+  /* 3 video — inset so edges stay ours; Drive iframe eats keys after play */
+  .slide[data-video] .bg {
+    inset: 5.5vh 9.5vw 7.5vh;
+  }
+  .nav-hit {
+    position: absolute; top: 0; bottom: 0; width: 9vw; z-index: 18;
+    border: 0; padding: 0; background: transparent; cursor: pointer; color: var(--acc);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-hit.prev { left: 0; }
+  .nav-hit.next { right: 0; }
+  .nav-hit:hover { background: rgba(7,9,12,.22); }
+  .nav-hit span {
+    display: block; font-size: 4.2vh; font-weight: 500; opacity: .35;
+    transition: opacity .2s ease;
+  }
+  .nav-hit:hover span { opacity: 1; }
+  .vid-next {
+    position: absolute; right: 11vw; bottom: 2.2vh; z-index: 19;
+    background: var(--panel); border: 1px solid var(--line); color: var(--txt);
+    font: 600 1.5vh/1 "Space Grotesk", sans-serif;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 1.2vh 1.6vw; cursor: pointer;
+  }
+  .vid-next:hover { border-color: var(--acc); color: var(--acc); }
   .note {
-    position: absolute; top: 8vh; right: 3vw; z-index: 5;
+    position: absolute; top: 8vh; right: 11vw; z-index: 19;
     width: min(34vw, 420px);
     font-size: 1.7vh; line-height: 1.4; color: var(--txt);
   }
@@ -156,34 +180,21 @@
     border: 1px solid var(--line);
   }
 
-  /* 6 — Foto5 canvas, Foto6 timeline centered */
-  .s6 .num { color: #1a3a44; }
-  .s6 .stage {
-    position: absolute; inset: 8vh 5vw calc(var(--safe-b) + 2vh); z-index: 5;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .s6 .stage img {
-    max-width: 100%; max-height: 100%;
-    object-fit: contain;
-    box-shadow: 0 18px 50px rgba(16,40,48,.18);
-  }
-  .s6 .bar { background: #07090c; }
-
-  /* 7 */
-  .s7 { background: #0b0f14; }
-  .s7 .stage {
+  /* 6 and 7 — timeline slides */
+  .s6, .s7 { background: #0b0f14; }
+  .s6 .stage, .s7 .stage {
     position: absolute; inset: 8vh 4vw var(--safe-b);
     display: flex; flex-direction: column; gap: 2vh;
   }
-  .s7 h2 { font-size: 3.6vh; }
-  .s7 .timeline {
+  .s6 h2, .s7 h2 { font-size: 3.6vh; }
+  .s6 .timeline, .s7 .timeline {
     flex: 1; width: 100%; min-height: 0;
     object-fit: contain; background: #fff;
   }
-  .s7 .legend {
+  .s6 .legend, .s7 .legend {
     font-size: 1.85vh; line-height: 1.4; color: var(--dim); max-width: 60ch;
   }
-  .s7 .legend strong { color: var(--acc); font-weight: 700; }
+  .s6 .legend strong, .s7 .legend strong { color: var(--acc); font-weight: 700; }
 
   /* 8 9 10 — text in a panel, never on the photo */
   .dock-l {
@@ -221,6 +232,8 @@
 </head>
 <body>
 <div class="progress"><i id="bar"></i></div>
+<button type="button" class="nav-hit prev" data-dir="-1" aria-label="Slide anterior"><span>‹</span></button>
+<button type="button" class="nav-hit next" data-dir="1" aria-label="Slide siguiente"><span>›</span></button>
 <div class="deck" id="deck">
 
   <section class="slide s1 on" data-n="1">
@@ -255,11 +268,13 @@
       Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
       <strong>Hoy, Angelina Jordan</strong>
     </div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
     <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
     <div class="chrome num">04 / 11</div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s5" data-n="5">
@@ -283,10 +298,12 @@
   </section>
 
   <section class="slide s6" data-n="6">
-    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Cátedra de Bioética · UNER</div>
     <div class="chrome num">06 / 11</div>
     <div class="stage">
-      <img src="Fotos/Foto6.gif" alt="Línea de tiempo: Edades de la Historia">
+      <h2>Edades de la Historia</h2>
+      <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
+      <p class="legend">Un mapa del tiempo histórico: de la Prehistoria a la Actualidad.</p>
     </div>
     <div class="bar">
       <div><b>Mg. Daniel De Michele</b></div>
@@ -399,8 +416,16 @@
     if (bar) bar.style.width = ((i + 1) / slides.length) * 100 + "%";
     stopVideos();
     playVideo(slides[i]);
+    window.focus();
   }
 
+  document.addEventListener("click", (e) => {
+    const nav = e.target.closest("[data-dir]");
+    if (!nav) return;
+    e.preventDefault();
+    e.stopPropagation();
+    go(i + Number(nav.dataset.dir));
+  });
   document.addEventListener("keydown", (e) => {
     if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(i + 1); }
     else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); go(i - 1); }
@@ -412,7 +437,8 @@
     }
   });
   document.getElementById("deck").addEventListener("click", (e) => {
-    if (e.target.closest("iframe") || slides[i].dataset.video) return;
+    if (e.target.closest("iframe, [data-dir], .note")) return;
+    if (slides[i].dataset.video) return;
     go(e.clientX / innerWidth < 0.22 ? i - 1 : i + 1);
   });
   let x0 = 0;
