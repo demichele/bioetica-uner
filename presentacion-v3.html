@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bioética — UNER · 2026 · V3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;700;800&family=Source+Sans+3:wght@450;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #07141c;
+    --deep: #0b1c28;
+    --vellum: #f3ebe0;
+    --card: #ebe2d4;
+    --ink: #142028;
+    --ox: #8a1c32;
+    --indigo: #1a3d56;
+    --gilt: #c4a046;
+    --mute: #6d7a80;
+    --safe-b: 8vh;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--night); overflow: hidden; }
+  body {
+    font-family: "Source Sans 3", "Helvetica Neue", sans-serif;
+    color: var(--vellum);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2 { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; letter-spacing: -.05em; line-height: .9; }
+
+  .rail {
+    position: absolute; left: 0; right: 0; top: 0; z-index: 16;
+    height: 4.4vh;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.4vw;
+    background: #050e14;
+    border-bottom: 1px solid rgba(196,160,70,.35);
+    font-size: 1.15vh; font-weight: 700; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--gilt);
+  }
+  .rail em { font-style: normal; color: #c9bba4; letter-spacing: .2em; }
+
+  .progress { position: absolute; inset: auto 0 0; height: 3px; z-index: 22; background: #050e14; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--ox); transition: width .35s ease; }
+
+  .deck { position: relative; width: 100%; height: 100%; }
+  .slide {
+    position: absolute; inset: 4.4vh 0 var(--safe-b);
+    display: none; overflow: hidden; z-index: 0;
+  }
+  .slide.on,
+  body:not(.js) .slide:first-child { display: block; z-index: 1; }
+  .slide.on { animation: open .6s cubic-bezier(.16,.8,.2,1) both; }
+  @keyframes open {
+    from { opacity: 0; transform: scale(1.03); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .bg { position: absolute; inset: 0; }
+  .bg img, .bg iframe { width: 100%; height: 100%; object-fit: cover; border: 0; }
+
+  .wm {
+    position: absolute; right: -1vw; bottom: -4vh; z-index: 1;
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: 38vh; line-height: .7; letter-spacing: -.08em;
+    color: rgba(196,160,70,.08); pointer-events: none; user-select: none;
+  }
+  .lamina {
+    position: absolute; top: 2.2vh; left: 2.2vw; z-index: 8;
+    font-size: 1.2vh; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gilt);
+  }
+  .lamina b { color: var(--ox); }
+
+  .bar {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 17;
+    height: var(--safe-b);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 2.4vw;
+    background: #050e14;
+    border-top: 1px solid rgba(196,160,70,.3);
+    font-size: 1.25vh; letter-spacing: .08em; color: var(--mute);
+  }
+  .bar b { color: var(--vellum); font-weight: 700; font-size: 1.4vh; letter-spacing: .12em; text-transform: uppercase; }
+  .bar .inst { text-align: right; }
+
+  .nav-hit {
+    position: absolute; top: 4.4vh; bottom: var(--safe-b); width: 7vw; z-index: 18;
+    border: 0; background: transparent; cursor: pointer; color: var(--gilt);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-hit.prev { left: 0; }
+  .nav-hit.next { right: 0; }
+  .nav-hit span { font-size: 3.4vh; opacity: .22; }
+  .nav-hit:hover span { opacity: 1; }
+
+  /* 1 — astrolabe title page */
+  .s1 { background: radial-gradient(ellipse at 68% 46%, #123044 0%, var(--night) 58%); }
+  .s1 .orb {
+    position: absolute; right: 8vw; top: 50%; transform: translateY(-52%);
+    width: min(62vh, 38vw); height: min(62vh, 38vw); z-index: 3;
+  }
+  .s1 .orb::before, .s1 .orb::after {
+    content: ""; position: absolute; border-radius: 50%;
+    border: 1px solid rgba(196,160,70,.45);
+  }
+  .s1 .orb::before { inset: -3.4vh; }
+  .s1 .orb::after { inset: -6.6vh; border-color: rgba(196,160,70,.22); }
+  .s1 .orb img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    filter: saturate(.55) contrast(1.15);
+    outline: 2px solid var(--gilt); outline-offset: 8px;
+  }
+  .s1 .mast {
+    position: absolute; left: 5vw; top: 6vh; z-index: 5; max-width: 40vw;
+  }
+  .s1 .mast .cat {
+    font-size: 1.55vh; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--gilt); font-weight: 700;
+  }
+  .s1 .mast .uni { margin-top: 1vh; font-size: 1.55vh; color: #9aa8b0; letter-spacing: .1em; }
+  .s1 .hero { position: absolute; left: 5vw; bottom: 7vh; z-index: 5; width: 48vw; }
+  .s1 .hero h1 {
+    font-size: clamp(64px, 16vh, 180px);
+    text-transform: uppercase; line-height: .78;
+  }
+  .s1 .hero h1 span { color: var(--ox); }
+
+  /* 2 — mounted plate + catalog card */
+  .s2 { background: #5a1a24; }
+  .s2 .mount {
+    position: absolute; left: 5vw; top: 5vh; bottom: 6vh; right: 34vw; z-index: 3;
+    background: var(--vellum); padding: 1.8vh 1.6vw;
+    box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  }
+  .s2 .mount img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.2) contrast(1.05); }
+  .s2 .card {
+    position: absolute; right: 4vw; top: 22vh; width: 28vw; z-index: 5;
+    background: var(--night); padding: 3.4vh 2.2vw 3vh;
+    border-top: 8px solid var(--gilt);
+  }
+  .s2 h2 { font-size: 4.2vh; }
+  .s2 .sub { margin-top: 1.8vh; color: var(--gilt); font-weight: 700; font-size: 1.85vh; }
+
+  /* 3–4 video — proscenium */
+  .slide[data-video] { background: #04090d; }
+  .slide[data-video] .bg {
+    inset: 5vh 9vw 5vh;
+    outline: 2px solid var(--gilt);
+    outline-offset: 12px;
+    box-shadow: 0 0 0 1px rgba(138,28,50,.5);
+  }
+  .vid-next {
+    position: absolute; right: 9.4vw; bottom: 2.2vh; z-index: 19;
+    background: var(--ox); border: 0; color: var(--vellum);
+    font: 700 1.35vh/1 "Source Sans 3", sans-serif; letter-spacing: .18em; text-transform: uppercase;
+    padding: 1.25vh 1.7vw; cursor: pointer;
+  }
+  .note {
+    position: absolute; top: 6vh; left: 9.6vw; z-index: 19;
+    width: min(30vw, 380px);
+    background: var(--vellum); color: var(--ink);
+    padding: 2vh 1.6vw 1.8vh;
+    font-size: 1.65vh; line-height: 1.4;
+    border-bottom: 5px solid var(--ox);
+  }
+  .note strong { display: block; margin-top: 1vh; color: var(--ox); }
+
+  /* 5 — gallery wall + ficha */
+  .s5 { background: #cfc4b4; }
+  .s5.on { display: block; }
+  .s5 .frame {
+    position: absolute; left: 4vw; top: 5vh; bottom: 5vh; width: 54vw; z-index: 3;
+    background: #1a1210; padding: 1.5vh 1.2vw;
+    box-shadow: 0 18px 50px rgba(20,10,8,.28);
+  }
+  .s5 .frame img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 40%; }
+  .s5 .ficha {
+    position: absolute; right: 4vw; top: 14vh; width: min(34vw, 460px); z-index: 5;
+    background: var(--vellum); color: var(--ink);
+    padding: 3vh 2.2vw 2.6vh;
+    border-left: 10px solid var(--ox);
+  }
+  .s5 .k, .era, .k {
+    color: var(--ox); font-size: 1.3vh; letter-spacing: .26em; text-transform: uppercase; font-weight: 700;
+  }
+  .s5 h2 { font-size: 2.9vh; margin-top: .8vh; }
+  .s5 h2 span {
+    display: block; margin-top: 1vh; font-size: 1.6vh; font-weight: 600;
+    color: #5a4e44; letter-spacing: 0; font-family: "Source Sans 3", sans-serif;
+  }
+  .s5 p { margin-top: 1.8vh; font-size: 1.75vh; line-height: 1.4; color: #2a2420; }
+  .s5 .who { margin-top: 2vh; color: var(--indigo); font-size: 1.25vh; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; }
+  .s5 .portrait {
+    margin-top: 1.4vh; width: 13vh; height: 15vh;
+    object-fit: cover; object-position: 50% 10%;
+    outline: 1px solid rgba(20,32,40,.25);
+  }
+
+  /* 6 7 — chapter plate */
+  .s6, .s7 { background: var(--vellum); color: var(--ink); }
+  .s6 .lamina, .s7 .lamina { color: var(--indigo); }
+  .s6 .lamina b, .s7 .lamina b { color: var(--ox); }
+  .s6 .wm, .s7 .wm { color: rgba(138,28,50,.07); }
+  .s6 .stage, .s7 .stage {
+    position: absolute; inset: 7vh 5vw 3.4vh;
+    display: flex; flex-direction: column; gap: 1.6vh;
+  }
+  .s6 h2, .s7 h2 { font-size: 5.2vh; padding-bottom: 1.2vh; border-bottom: 4px solid var(--ox); }
+  .s6 .timeline, .s7 .timeline {
+    flex: 1; width: 100%; min-height: 0; object-fit: contain;
+    background: #fff; outline: 1px solid #c9bba8;
+  }
+  .s6 .legend, .s7 .legend { font-size: 1.85vh; line-height: 1.4; color: #3a3330; max-width: 64ch; }
+  .s6 .legend strong, .s7 .legend strong { color: var(--ox); }
+
+  /* 8 9 — figure above, lemma below */
+  .s8, .s9 { background: var(--night); }
+  .s8 .plate, .s9 .plate {
+    position: absolute; left: 5vw; right: 5vw; top: 5vh; height: 52%;
+    outline: 1px solid rgba(196,160,70,.4);
+  }
+  .s8 .plate img, .s9 .plate img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.08); }
+  .s8 .lemma, .s9 .lemma {
+    position: absolute; left: 5vw; right: 5vw; top: 61%; bottom: 3vh;
+    background: var(--deep); padding: 2.6vh 2.4vw 2vh;
+    border-left: 8px solid var(--ox);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .s8 h2, .s9 h2 { font-size: 3.8vh; margin: .8vh 0 1.2vh; }
+  .s8 p, .s9 p { font-size: 1.95vh; line-height: 1.42; color: #c5c0b4; }
+  .s8 .q { margin-top: 1.4vh; color: var(--vellum); font-weight: 700; font-size: 2.15vh; }
+
+  /* 10 — epitaph numbers */
+  .s10 { background: #04080c; }
+  .s10 .sky {
+    position: absolute; left: 5vw; right: 5vw; top: 5vh; height: 28%;
+    outline: 1px solid rgba(196,160,70,.3);
+  }
+  .s10 .sky img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.35); }
+  .s10 .stats {
+    position: absolute; left: 5vw; right: 5vw; top: 38%; bottom: 4vh; z-index: 5;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.4vw;
+  }
+  .stat { border-top: 6px solid var(--ox); padding-top: 2vh; }
+  .stat .n {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 12vh; font-weight: 800; letter-spacing: -.07em; line-height: .8;
+  }
+  .stat .u { margin-top: 1.4vh; color: var(--gilt); font-size: 1.85vh; }
+
+  /* 11 12 — manifesto on vellum */
+  .s11, .s12 { background: var(--vellum); color: var(--ink); }
+  .s11 .ribbon, .s12 .ribbon {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 7vw; overflow: hidden;
+  }
+  .s11 .ribbon img, .s12 .ribbon img {
+    width: 220%; height: 100%; object-fit: cover; object-position: 20% 50%;
+    filter: grayscale(1) contrast(1.25); opacity: .55;
+  }
+  .s11 .lamina, .s12 .lamina { left: 9vw; color: var(--indigo); }
+  .s11 .lamina b, .s12 .lamina b { color: var(--ox); }
+  .s11 .wm, .s12 .wm { color: rgba(26,61,86,.08); }
+  .s11 .copy, .s12 .copy {
+    position: absolute; left: 11vw; right: 7vw; top: 10vh; bottom: 4vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .s11 h2, .s12 h2 { font-size: 5.4vh; color: var(--night); margin-bottom: 2.4vh; max-width: 18ch; }
+  .s12 h2 { font-size: 4.4vh; }
+  .s11 p { font-size: 3.3vh; line-height: 1.36; color: #2a2622; }
+  .s12 p { font-size: 2.45vh; line-height: 1.4; color: #2a2622; }
+  .s11 p + p, .s12 p + p { margin-top: 1.5vh; }
+  .s11 strong, .s12 strong { color: var(--ox); }
+  .s11 u, .s12 u { text-underline-offset: .16em; text-decoration-color: var(--ox); text-decoration-thickness: 2px; }
+  .s12 .era { color: var(--ox); margin-bottom: 1.5vh; }
+
+  /* 13 — hanging gallery bar; image sits below so faces stay clear */
+  .slide.s13.on { display: flex; flex-direction: column; }
+  .s13 { background: #cfc2aa; }
+  .s13 .lamina { display: none; }
+  .s13 .copy {
+    position: relative; flex: 0 0 auto; order: 1; z-index: 5;
+    background: #07141c; padding: 2.2vh 5vw 2vh;
+    border-bottom: 6px solid var(--ox);
+  }
+  .s13 .bg { position: relative; flex: 1 1 auto; order: 2; min-height: 0; inset: auto; }
+  .s13 .bg img { object-fit: cover; object-position: center 22%; }
+  .s13 h2 { font-size: 3.5vh; margin-bottom: 1vh; }
+  .s13 p { font-size: 1.9vh; line-height: 1.4; color: #d4cbbd; max-width: 78ch; }
+  .s13 p + p { margin-top: .8vh; }
+  .s13 .spa { color: var(--gilt); letter-spacing: .2em; text-transform: uppercase; font-weight: 700; font-size: 1.65vh; }
+
+  /* 14 15 — text left, plate right */
+  .s14, .s15 { background: var(--deep); }
+  .pair {
+    position: absolute; inset: 7vh 4vw 3.2vh;
+    display: grid; grid-template-columns: 1fr min(48vh, 38vw); gap: 3vw;
+    align-items: stretch;
+  }
+  .pair > img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%;
+    outline: 1px solid rgba(196,160,70,.4);
+  }
+  .s14 .copy, .s15 .copy {
+    display: flex; flex-direction: column; justify-content: flex-start; gap: 1.8vh;
+    padding-right: 1vw;
+  }
+  .s14 h2, .s15 h2 { font-size: 4vh; }
+  .s14 p, .s15 p { font-size: 2.25vh; line-height: 1.4; color: #c9c2b6; }
+  .s15 p { font-size: 3vh; }
+  .s14 strong, .s15 strong { color: var(--vellum); }
+  .s14 .principles {
+    color: var(--ox); font-size: 2.8vh; font-weight: 800;
+    letter-spacing: .08em; text-transform: uppercase;
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+  .s15 .era { color: var(--gilt); }
+
+  /* 16 — diptych + footnote */
+  .s16 { background: #0a141c; }
+  .s16 .diptych {
+    position: absolute; left: 5vw; right: 5vw; top: 5vh; height: 48%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.4vw;
+  }
+  .s16 figure { position: relative; margin: 0; overflow: hidden; outline: 1px solid rgba(196,160,70,.4); }
+  .s16 figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+  .s16 figure:first-child img { object-fit: contain; object-position: center; background: #16110e; }
+  .s16 figcaption {
+    position: absolute; left: 0; bottom: 0;
+    padding: .55vh 1vw; background: var(--ox); color: var(--vellum);
+    font-size: 1.25vh; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  }
+  .s16 .copy {
+    position: absolute; left: 5vw; right: 5vw; top: 57%; bottom: 3vh;
+    background: var(--deep); padding: 2.4vh 2.4vw 2vh;
+    border-top: 6px solid var(--gilt);
+    display: flex; flex-direction: column; gap: 1.3vh; overflow: hidden;
+  }
+  .s16 h2 { font-size: 3.4vh; }
+  .s16 .era { color: var(--gilt); }
+  .s16 p { font-size: 2.15vh; line-height: 1.38; color: #c9c2b6; }
+  .s16 strong { color: var(--vellum); }
+</style>
+</head>
+<body>
+<div class="rail"><span>Cátedra de Bioética</span><em>Folio académico · UNER · 2026</em></div>
+<div class="progress"><i id="bar"></i></div>
+<button type="button" class="nav-hit prev" data-dir="-1" aria-label="Slide anterior"><span>‹</span></button>
+<button type="button" class="nav-hit next" data-dir="1" aria-label="Slide siguiente"><span>›</span></button>
+<div class="deck" id="deck">
+
+  <section class="slide s1 on" data-n="1">
+    <div class="lamina">Lámina <b>I</b> · 16</div>
+    <div class="orb"><img src="Fotos/fondo-adn.png" alt="Cadena de ADN"></div>
+    <div class="mast">
+      <div class="cat">Cátedra de BIOÉTICA</div>
+      <div class="uni">Ciencias de la Salud / UNER</div>
+    </div>
+    <div class="hero"><h1>BIO<span>ÉTICA</span></h1></div>
+  </section>
+
+  <section class="slide s2" data-n="2">
+    <div class="lamina">Lámina <b>II</b> · 16</div>
+    <div class="mount"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
+    <div class="card">
+      <h2>1er Práctico de Anatomía</h2>
+      <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
+    </div>
+  </section>
+
+  <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
+    <div class="lamina">Lámina <b>III</b> · 16</div>
+    <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="note">
+      Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
+      <strong>Hoy, Angelina Jordan</strong>
+    </div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
+    <div class="lamina">Lámina <b>IV</b> · 16</div>
+    <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s5" data-n="5">
+    <div class="lamina">Lámina <b>V</b> · 16</div>
+    <div class="frame"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
+    <div class="ficha">
+      <div class="k">Before Bioethics</div>
+      <h2>A History of American Medical Ethics
+        <span>from the Colonial Period to the Bioethics Revolution</span>
+      </h2>
+      <p>Introduce el concepto de tecnologías moralmente disruptivas y explica cómo cambiaron la concepción que los médicos tienen de sus deberes hacia sus pacientes, e impactaron nuestro concepto de vida, muerte y deberes médicos.</p>
+      <div class="who">Robert Baker / USA</div>
+      <img class="portrait" src="Fotos/Foto4.png" alt="Robert Baker">
+    </div>
+  </section>
+
+  <section class="slide s6" data-n="6">
+    <div class="wm">VI</div>
+    <div class="lamina">Lámina <b>VI</b> · 16</div>
+    <div class="stage">
+      <h2>Edades de la Historia</h2>
+      <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
+      <p class="legend">Un mapa del tiempo histórico: de la Prehistoria a la Actualidad.</p>
+    </div>
+  </section>
+
+  <section class="slide s7" data-n="7">
+    <div class="wm">VII</div>
+    <div class="lamina">Lámina <b>VII</b> · 16</div>
+    <div class="stage">
+      <h2>Edades de la Historia</h2>
+      <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
+      <p class="legend">Hablamos del origen y desarrollo de los seres vivos del planeta y su contexto: pero… <strong>¿es ese el principio?</strong></p>
+    </div>
+  </section>
+
+  <section class="slide s8" data-n="8">
+    <div class="lamina">Lámina <b>VIII</b> · 16</div>
+    <div class="plate"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
+    <div class="lemma">
+      <div class="k">Planeta</div>
+      <h2>Un tiempo que necesitó un planeta para existir</h2>
+      <p>El Paleolítico fue un tiempo que necesitó de un planeta para poder existir, o sea un planeta que lo hiciera posible…</p>
+      <p class="q">¿Cuándo aparece este planeta?<br>(y todos los demás…?)</p>
+    </div>
+  </section>
+
+  <section class="slide s9" data-n="9">
+    <div class="lamina">Lámina <b>IX</b> · 16</div>
+    <div class="plate"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
+    <div class="lemma">
+      <div class="k">14.000 millones de años</div>
+      <h2>El Big Bang: nace el universo</h2>
+      <p>«La Gran Explosión» alude a un evento en el que materia, espacio y tiempo fueron formados conjuntamente.</p>
+    </div>
+  </section>
+
+  <section class="slide s10" data-n="10">
+    <div class="lamina">Lámina <b>X</b> · 16</div>
+    <div class="sky"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="k">Big Bang · nace el universo</div>
+        <div class="n">14.000</div>
+        <div class="u">millones de años</div>
+      </div>
+      <div class="stat">
+        <div class="k">Tierra · formación del planeta</div>
+        <div class="n">4.500</div>
+        <div class="u">millones de años</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s11" data-n="11">
+    <div class="ribbon"><img src="Fotos/Foto10.gif" alt=""></div>
+    <div class="wm">XI</div>
+    <div class="lamina">Lámina <b>XI</b> · 16</div>
+    <div class="copy">
+      <h2>Origen ancestral de la Bioética</h2>
+      <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
+    </div>
+  </section>
+
+  <section class="slide s12" data-n="12">
+    <div class="ribbon"><img src="Fotos/Foto10.gif" alt=""></div>
+    <div class="wm">XII</div>
+    <div class="lamina">Lámina <b>XII</b> · 16</div>
+    <div class="copy">
+      <h2>Orígenes en la Ética y Bioética</h2>
+      <div class="era">Edad Antigua</div>
+      <p>Todos los filósofos mencionados en este período nacen entre los años −470 y −384 a.C. (110 años).</p>
+      <p>En la Grecia antigua:</p>
+      <p>Los filósofos como Sócrates, Platón y Aristóteles, ya discutían temas sobre la buena vida, la justicia y la virtud.</p>
+      <p>La Ética médica se perfiló en esta etapa con el Juramento Hipocrático (siglo V a.C.), que orientaba a los médicos hacia los principios de beneficencia y la no maleficencia.</p>
+    </div>
+  </section>
+
+  <section class="slide s13" data-n="13">
+    <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
+    <div class="lamina">Lámina <b>XIII</b> · 16</div>
+    <div class="copy">
+      <h2>Los Filósofos griegos y la Ética</h2>
+      <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
+      <p class="spa">S.P.A (Nemotecnia)</p>
+      <p>Platón y Aristóteles fueron discípulos de Sócrates.</p>
+    </div>
+  </section>
+
+  <section class="slide s14" data-n="14">
+    <div class="lamina">Lámina <b>XIV</b> · 16</div>
+    <div class="pair">
+      <div class="copy">
+        <h2>HIPÓCRATES (−460 a.C. – −379 a.C.)</h2>
+        <p>Prestigioso médico de la Antigua Grecia. Considerado el <strong>Padre de la Medicina</strong>. Funda la Escuela Médica que lleva su nombre. Revolucionó la medicina de su época, estableciéndola como una disciplina separada de otros campos con los cuales se la había asociado tradicionalmente (principalmente la <strong>teúrgia</strong> y la filosofía) convirtiendo el ejercicio de la misma en profesión.</p>
+        <p>La Ética hipocrática priorizó los principios de</p>
+        <p class="principles">Beneficencia y no maleficencia</p>
+      </div>
+      <img src="Fotos/Foto12.png" alt="Hipócrates">
+    </div>
+  </section>
+
+  <section class="slide s15" data-n="15">
+    <div class="lamina">Lámina <b>XV</b> · 16</div>
+    <div class="pair">
+      <div class="copy">
+        <h2>Orígenes de la Ética / Bioética</h2>
+        <div class="era">Edad Media</div>
+        <p>En la Edad Media, las discusiones éticas estuvieron fuertemente influenciadas por la <strong>filosofía cristiana</strong>, con autores como <strong>Santo Tomás de Aquino</strong>, quien vinculó la ética con la <strong>ley natural y la dignidad del ser humano</strong>.</p>
+      </div>
+      <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
+    </div>
+  </section>
+
+  <section class="slide s16" data-n="16">
+    <div class="lamina">Lámina <b>XVI</b> · 16</div>
+    <div class="diptych">
+      <figure>
+        <img src="Fotos/Foto14.jpeg" alt="Immanuel Kant">
+        <figcaption>Kant</figcaption>
+      </figure>
+      <figure>
+        <img src="Fotos/Foto15.jpeg" alt="Jeremy Bentham">
+        <figcaption>Bentham</figcaption>
+      </figure>
+    </div>
+    <div class="copy">
+      <h2>Orígenes de la Ética / Bioética</h2>
+      <div class="era">Edad Moderna</div>
+      <p>Durante los siglos XVII y XVIII, con filósofos como <strong>Kant</strong> (Deontologismo) y <strong>Bentham</strong> (Utilitarismo) emergen marcos éticos más racionalistas que influirán en la reflexión sobre el deber profesional.</p>
+      <p><strong>Kant</strong> propuso la importancia de actuar según principios universales, mientras que el <strong>utilitarismo</strong> puso énfasis en maximizar la felicidad general. En el ámbito médico, estas discusiones comenzaron a influir más claramente en la ética clínica.</p>
+    </div>
+  </section>
+</div>
+<div class="bar">
+  <div><b>Mg. Daniel De Michele</b></div>
+  <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
+</div>
+
+<script>
+(function () {
+  document.body.classList.add("js");
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  let i = 0;
+  const preview = (id) => "https://drive.google.com/file/d/" + id + "/preview";
+
+  function stopVideos() {
+    document.querySelectorAll("iframe[data-drive]").forEach((f) => f.removeAttribute("src"));
+  }
+  function playVideo(slide) {
+    const id = slide.dataset.video;
+    if (!id) return;
+    const f = slide.querySelector("iframe[data-drive]");
+    if (f) f.src = preview(id);
+  }
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    if (bar) bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+    stopVideos();
+    playVideo(slides[i]);
+    window.focus();
+  }
+
+  document.addEventListener("click", (e) => {
+    const nav = e.target.closest("[data-dir]");
+    if (!nav) return;
+    e.preventDefault();
+    e.stopPropagation();
+    go(i + Number(nav.dataset.dir));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(i + 1); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); go(i - 1); }
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
+    else if (e.key === "f" || e.key === "F") {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  document.getElementById("deck").addEventListener("click", (e) => {
+    if (e.target.closest("iframe, [data-dir], .note")) return;
+    if (slides[i].dataset.video) return;
+    go(e.clientX / innerWidth < 0.22 ? i - 1 : i + 1);
+  });
+  let x0 = 0;
+  document.addEventListener("touchstart", (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1);
+  }, { passive: true });
+  go(0);
+})();
+</script>
+</body>
+</html>
