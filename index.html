@@ -278,6 +278,36 @@
   }
   .s15 .era + p { margin-top: -.4vh; }
   .s15 p { font-size: 3.4vh; line-height: 1.42; }
+
+  /* 16 — two stacked portraits */
+  .s16 { background: #0b0f14; }
+  .s16 .pair {
+    position: absolute; inset: 8vh 4vw calc(var(--safe-b) + 2.2vh);
+    display: grid; grid-template-columns: min(54vh, 44vw) 1fr; gap: 2.8vw;
+    align-items: stretch;
+  }
+  .s16 .stack {
+    display: grid; grid-template-rows: 1fr 1fr; gap: 1.6vh; min-height: 0;
+  }
+  .s16 .stack figure { position: relative; margin: 0; min-height: 0; overflow: hidden; }
+  .s16 .stack img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+  .s16 .stack figure:first-child img { object-fit: contain; object-position: center center; background: #1a1510; }
+  .s16 .stack figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: .7vh 1vw; background: rgba(7,9,12,.72);
+    color: var(--acc); font-size: 1.45vh; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .s16 .copy {
+    display: flex; flex-direction: column; justify-content: flex-start; gap: 2vh; min-height: 0;
+  }
+  .s16 h2 { font-size: 4.8vh; }
+  .s16 .era {
+    color: var(--acc); font-size: 2.5vh; letter-spacing: .2em;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .s16 p { font-size: 2.95vh; line-height: 1.42; font-weight: 500; color: var(--dim); }
+  .s16 strong { color: var(--txt); font-weight: 700; }
 </style>
 </head>
 <body>
@@ -292,14 +322,14 @@
       <div class="cat">Cátedra de BIOÉTICA</div>
       <div class="uni">Ciencias de la Salud / UNER</div>
     </div>
-    <div class="chrome num">01 / 15</div>
+    <div class="chrome num">01 / 16</div>
     <div class="hero"><h1>BIOÉTICA</h1></div>
   </section>
 
   <section class="slide s2" data-n="2">
     <div class="bg"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
     <div class="chrome chip">Cátedra de Bioética · Ciclo 2026</div>
-    <div class="chrome num">02 / 15</div>
+    <div class="chrome num">02 / 16</div>
     <div class="dock panel">
       <h2>1er Práctico de Anatomía</h2>
       <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
@@ -308,7 +338,7 @@
 
   <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
     <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">03 / 15</div>
+    <div class="chrome num">03 / 16</div>
     <div class="note panel">
       Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
       <strong>Hoy, Angelina Jordan</strong>
@@ -318,13 +348,13 @@
 
   <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
     <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">04 / 15</div>
+    <div class="chrome num">04 / 16</div>
     <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s5" data-n="5">
     <div class="bg"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
-    <div class="chrome num">05 / 15</div>
+    <div class="chrome num">05 / 16</div>
     <div class="author">
       <div class="panel">
         <div class="k">Before Bioethics</div>
@@ -340,7 +370,7 @@
 
   <section class="slide s6" data-n="6">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">06 / 15</div>
+    <div class="chrome num">06 / 16</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
@@ -350,7 +380,7 @@
 
   <section class="slide s7" data-n="7">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">07 / 15</div>
+    <div class="chrome num">07 / 16</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
@@ -361,7 +391,7 @@
   <section class="slide s8" data-n="8">
     <div class="bg"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
     <div class="chrome chip">Paleolítico</div>
-    <div class="chrome num">08 / 15</div>
+    <div class="chrome num">08 / 16</div>
     <div class="dock-l panel">
       <div class="k">Planeta</div>
       <h2>Un tiempo que necesitó un planeta para existir</h2>
@@ -373,7 +403,7 @@
   <section class="slide s9" data-n="9">
     <div class="bg"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
     <div class="chrome chip">Cosmología</div>
-    <div class="chrome num">09 / 15</div>
+    <div class="chrome num">09 / 16</div>
     <div class="dock-l panel">
       <div class="k">14.000 millones de años</div>
       <h2>El Big Bang: nace el universo</h2>
@@ -384,7 +414,7 @@
   <section class="slide s10" data-n="10">
     <div class="bg"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
     <div class="chrome chip">Antigüedad</div>
-    <div class="chrome num">10 / 15</div>
+    <div class="chrome num">10 / 16</div>
     <div class="stats">
       <div class="stat panel">
         <div class="k">Big Bang · nace el universo</div>
@@ -402,7 +432,7 @@
   <section class="slide s11" data-n="11">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Origen</div>
-    <div class="chrome num">11 / 15</div>
+    <div class="chrome num">11 / 16</div>
     <div class="copy">
       <h2>Origen ancestral de la Bioética</h2>
       <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
@@ -412,7 +442,7 @@
   <section class="slide s12" data-n="12">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">12 / 15</div>
+    <div class="chrome num">12 / 16</div>
     <div class="copy">
       <h2>Orígenes en la Ética y Bioética</h2>
       <div class="era">Edad Antigua</div>
@@ -426,7 +456,7 @@
   <section class="slide s13" data-n="13">
     <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
     <div class="chrome chip">Grecia antigua</div>
-    <div class="chrome num">13 / 15</div>
+    <div class="chrome num">13 / 16</div>
     <div class="copy panel">
       <h2>Los Filósofos griegos y la Ética</h2>
       <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
@@ -437,7 +467,7 @@
 
   <section class="slide s14" data-n="14">
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">14 / 15</div>
+    <div class="chrome num">14 / 16</div>
     <div class="pair">
       <img src="Fotos/Foto12.png" alt="Hipócrates">
       <div class="copy">
@@ -451,13 +481,36 @@
 
   <section class="slide s15" data-n="15">
     <div class="chrome chip">Edad Media</div>
-    <div class="chrome num">15 / 15</div>
+    <div class="chrome num">15 / 16</div>
     <div class="pair">
       <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
       <div class="copy">
         <h2>Orígenes de la Ética / Bioética</h2>
         <div class="era">Edad Media</div>
         <p>En la Edad Media, las discusiones éticas estuvieron fuertemente influenciadas por la <strong>filosofía cristiana</strong>, con autores como <strong>Santo Tomás de Aquino</strong>, quien vinculó la ética con la <strong>ley natural y la dignidad del ser humano</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s16" data-n="16">
+    <div class="chrome chip">Edad Moderna</div>
+    <div class="chrome num">16 / 16</div>
+    <div class="pair">
+      <div class="stack">
+        <figure>
+          <img src="Fotos/Foto14.jpeg" alt="Immanuel Kant">
+          <figcaption>Kant</figcaption>
+        </figure>
+        <figure>
+          <img src="Fotos/Foto15.jpeg" alt="Jeremy Bentham">
+          <figcaption>Bentham</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <h2>Orígenes de la Ética / Bioética</h2>
+        <div class="era">Edad Moderna</div>
+        <p>Durante los siglos XVII y XVIII, con filósofos como <strong>Kant</strong> (Deontologismo) y <strong>Bentham</strong> (Utilitarismo) emergen marcos éticos más racionalistas que influirán en la reflexión sobre el deber profesional.</p>
+        <p><strong>Kant</strong> propuso la importancia de actuar según principios universales, mientras que el <strong>utilitarismo</strong> puso énfasis en maximizar la felicidad general. En el ámbito médico, estas discusiones comenzaron a influir más claramente en la ética clínica.</p>
       </div>
     </div>
   </section>

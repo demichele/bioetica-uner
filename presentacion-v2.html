@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bioética — UNER · 2026 · V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@380;500;650;800&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #100d0b;
+    --bone: #efe6d6;
+    --paper: #e4d8c4;
+    --ash: #8a7d6e;
+    --rust: #c4482a;
+    --gold: #c4a35a;
+    --safe-b: 8.2vh;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--ink); overflow: hidden; }
+  body {
+    font-family: Outfit, "Helvetica Neue", sans-serif;
+    color: var(--bone);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2 { font-family: Syne, Outfit, sans-serif; font-weight: 800; letter-spacing: -.06em; line-height: .92; }
+
+  .progress { position: absolute; inset: auto 0 0; height: 3px; z-index: 22; background: #1a1612; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--rust); transition: width .35s ease; }
+
+  .spine {
+    position: absolute; left: 0; top: 0; bottom: var(--safe-b); z-index: 12;
+    width: 4.6vw; writing-mode: vertical-rl; transform: rotate(180deg);
+    display: flex; align-items: center; justify-content: center; gap: 2vh;
+    font-size: 1.15vh; font-weight: 650; letter-spacing: .38em; text-transform: uppercase;
+    color: var(--gold); border-right: 1px solid rgba(196,163,90,.28);
+  }
+
+  .deck { position: relative; width: 100%; height: 100%; }
+  .slide {
+    position: absolute; inset: 0 0 var(--safe-b) 4.6vw;
+    display: none; overflow: hidden; z-index: 0;
+  }
+  .slide.on,
+  body:not(.js) .slide:first-child { display: block; z-index: 1; }
+  .slide.on { animation: rise .55s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes rise { from { opacity: 0; clip-path: inset(6% 0 0 0); } to { opacity: 1; clip-path: inset(0); } }
+
+  .bg { position: absolute; inset: 0; }
+  .bg img, .bg iframe { width: 100%; height: 100%; object-fit: cover; border: 0; }
+
+  .idx {
+    position: absolute; top: 2.4vh; right: 2.4vw; z-index: 8;
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 4.4vh;
+    color: var(--rust); letter-spacing: -.08em; line-height: 1;
+  }
+  .idx small { display: block; font-family: Outfit, sans-serif; font-size: 1.2vh; font-weight: 650; letter-spacing: .22em; color: var(--ash); margin-top: .3vh; }
+  .mark {
+    position: absolute; top: 2.8vh; left: 2.2vw; z-index: 8;
+    font-size: 1.25vh; font-weight: 650; letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+  }
+
+  .bar {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 17;
+    height: var(--safe-b);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 2.4vw 0 4.6vw;
+    background: #0a0807;
+    border-top: 1px solid rgba(196,163,90,.3);
+    font-size: 1.25vh; letter-spacing: .08em; color: var(--ash);
+  }
+  .bar b { color: var(--bone); font-weight: 650; font-size: 1.4vh; letter-spacing: .12em; text-transform: uppercase; }
+  .bar .inst { text-align: right; }
+
+  .nav-hit {
+    position: absolute; top: 0; bottom: var(--safe-b); width: 7.5vw; z-index: 18;
+    border: 0; background: transparent; cursor: pointer; color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-hit.prev { left: 0; }
+  .nav-hit.next { right: 0; }
+  .nav-hit span { font-size: 3.6vh; opacity: .25; }
+  .nav-hit:hover span { opacity: 1; }
+
+  /* 1 */
+  .s1 { background: #070604; }
+  .s1 .bg { filter: saturate(.4) contrast(1.15); opacity: .72; }
+  .s1 .veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, #070604 0%, transparent 28%),
+      linear-gradient(0deg, #070604 0%, transparent 40%);
+  }
+  .s1 .mast { position: absolute; top: 6vh; left: 5vw; z-index: 5; max-width: 28vw; }
+  .s1 .mast .cat { font-size: 1.6vh; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); font-weight: 650; }
+  .s1 .mast .uni { margin-top: 1vh; font-size: 1.55vh; color: var(--ash); letter-spacing: .08em; }
+  .s1 .hero { position: absolute; left: 5vw; bottom: 8vh; right: 8vw; z-index: 5; }
+  .s1 .hero h1 {
+    font-size: clamp(72px, 22vh, 240px);
+    text-transform: uppercase; color: var(--bone);
+    line-height: .78;
+  }
+  .s1 .hero h1 span { display: block; color: var(--rust); }
+
+  /* 2 */
+  .s2 { background: #1b100e; }
+  .s2 .bg { inset: 0 28vw 0 0; filter: grayscale(.35) contrast(1.05); }
+  .s2 .cap {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 32vw;
+    background: #241412; padding: 10vh 3vw 4vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    border-left: 8px solid var(--rust);
+  }
+  .s2 h2 { font-size: 4.4vh; color: var(--bone); }
+  .s2 .sub { margin-top: 2vh; color: var(--gold); font-weight: 650; font-size: 1.9vh; }
+
+  /* 3–4 video */
+  .slide[data-video] { background: #070604; }
+  .slide[data-video] .bg {
+    inset: 7vh 8vw calc(2vh);
+    outline: 1px solid var(--gold);
+    outline-offset: 10px;
+  }
+  .vid-next {
+    position: absolute; right: 8.5vw; bottom: 2vh; z-index: 19;
+    background: var(--rust); border: 0; color: var(--bone);
+    font: 650 1.4vh/1 Outfit, sans-serif; letter-spacing: .16em; text-transform: uppercase;
+    padding: 1.3vh 1.8vw; cursor: pointer;
+  }
+  .note {
+    position: absolute; top: 8vh; left: 8.5vw; z-index: 19;
+    width: min(32vw, 400px);
+    background: rgba(16,13,11,.82); padding: 2vh 1.6vw;
+    font-size: 1.7vh; line-height: 1.4; border-left: 4px solid var(--rust);
+  }
+  .note strong { display: block; margin-top: 1vh; color: var(--gold); }
+
+  /* 5 */
+  .s5 .bg { filter: contrast(1.08) saturate(.85); }
+  .s5 .bg::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(16,13,11,.15) 30%, rgba(16,13,11,.88) 68%);
+  }
+  .s5 .author {
+    position: absolute; right: 4vw; top: 10vh; bottom: 4vh; width: min(40vw, 540px); z-index: 5;
+    display: flex; flex-direction: column; gap: 2vh;
+  }
+  .s5 .k, .era, .k { color: var(--rust); font-size: 1.35vh; letter-spacing: .28em; text-transform: uppercase; font-weight: 650; }
+  .s5 h2 { font-size: 3.2vh; }
+  .s5 h2 span { display: block; margin-top: 1vh; font-size: 1.7vh; font-weight: 500; color: var(--ash); letter-spacing: 0; font-family: Outfit, sans-serif; }
+  .s5 p { font-size: 1.85vh; line-height: 1.4; color: #d8cfc0; }
+  .s5 .who { color: var(--gold); font-size: 1.3vh; letter-spacing: .2em; text-transform: uppercase; font-weight: 650; }
+  .s5 .portrait { width: 15vh; height: 18vh; object-fit: cover; object-position: 50% 10%; outline: 1px solid var(--gold); }
+
+  /* 6 7 */
+  .s6, .s7 { background: var(--paper); color: var(--ink); }
+  .s6 .idx, .s7 .idx { color: var(--rust); }
+  .s6 .mark, .s7 .mark { color: #6a4a28; }
+  .s6 .stage, .s7 .stage {
+    position: absolute; inset: 8vh 4vw 3vh;
+    display: flex; flex-direction: column; gap: 1.6vh;
+  }
+  .s6 h2, .s7 h2 { font-size: 5vh; color: var(--ink); }
+  .s6 .timeline, .s7 .timeline {
+    flex: 1; width: 100%; min-height: 0; object-fit: contain;
+    background: #fff; outline: 1px solid #c9b89a;
+  }
+  .s6 .legend, .s7 .legend { font-size: 1.9vh; line-height: 1.4; color: #4a3d32; max-width: 62ch; }
+  .s6 .legend strong, .s7 .legend strong { color: var(--rust); }
+
+  /* 8 9 */
+  .s8 .bg, .s9 .bg { filter: contrast(1.1); }
+  .s8 .col, .s9 .col {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 42vw; z-index: 5;
+    background: rgba(16,13,11,.82);
+    padding: 12vh 3.2vw 4vh;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--gold);
+  }
+  .s8 h2, .s9 h2 { font-size: 4.2vh; margin: 1.2vh 0 2vh; }
+  .s8 p, .s9 p { font-size: 2vh; line-height: 1.45; color: #cfc3b0; }
+  .s8 .q { margin-top: 2.4vh; color: var(--bone); font-weight: 650; font-size: 2.2vh; }
+
+  /* 10 */
+  .s10 .bg { filter: saturate(.3); }
+  .s10 .stats {
+    position: absolute; inset: 12vh 6vw 6vh; z-index: 5;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; align-content: center;
+  }
+  .stat { border-top: 4px solid var(--rust); padding-top: 2.4vh; }
+  .stat .n { font-family: Syne, sans-serif; font-size: 9vh; font-weight: 800; letter-spacing: -.08em; line-height: .85; color: var(--bone); }
+  .stat .u { margin-top: 1.2vh; color: var(--gold); font-size: 1.8vh; }
+
+  /* 11 12 — bone field, rust rule */
+  .s11, .s12 { background: var(--bone); color: var(--ink); }
+  .s11 .bg, .s12 .bg { width: 22vw; opacity: .55; filter: grayscale(1) contrast(1.2); }
+  .s11 .idx, .s12 .idx { color: var(--rust); }
+  .s11 .mark, .s12 .mark { color: #6a4a28; }
+  .s11 .copy, .s12 .copy {
+    position: absolute; left: 24vw; right: 5vw; top: 10vh; bottom: 3vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .s11 h2, .s12 h2 { font-size: 5.6vh; color: var(--ink); margin-bottom: 2.6vh; }
+  .s12 h2 { font-size: 4.6vh; }
+  .s11 p { font-size: 3.5vh; line-height: 1.35; color: #2a221c; }
+  .s12 p { font-size: 2.55vh; line-height: 1.4; color: #2a221c; }
+  .s11 p + p, .s12 p + p { margin-top: 1.6vh; }
+  .s11 strong, .s12 strong { color: var(--rust); }
+  .s11 u, .s12 u { text-underline-offset: .18em; text-decoration-color: var(--rust); text-decoration-thickness: 2px; }
+  .s12 .era { color: var(--rust); margin-bottom: 1.6vh; }
+
+  /* 13 */
+  .s13 { background: #cfc2aa; }
+  .s13 .bg img { object-fit: cover; object-position: center 22%; }
+  .s13 .copy {
+    position: absolute; left: 0; bottom: 0; right: 28vw; z-index: 5;
+    background: var(--ink); padding: 3.2vh 3vw 3vh;
+    border-top: 6px solid var(--rust);
+  }
+  .s13 h2 { font-size: 3.4vh; margin-bottom: 1.4vh; }
+  .s13 p { font-size: 1.95vh; line-height: 1.4; color: #cfc3b0; }
+  .s13 p + p { margin-top: 1.1vh; }
+  .s13 .spa { color: var(--gold); letter-spacing: .18em; text-transform: uppercase; font-weight: 650; font-size: 1.7vh; }
+
+  /* 14 15 16 */
+  .s14, .s15, .s16 { background: #16110e; }
+  .pair {
+    position: absolute; inset: 8vh 3.4vw 3vh;
+    display: grid; grid-template-columns: min(50vh, 40vw) 1fr; gap: 3vw;
+    align-items: stretch;
+  }
+  .pair > img, .s16 .stack img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
+  .pair > img { outline: 1px solid rgba(196,163,90,.4); }
+  .s14 .copy, .s15 .copy, .s16 .copy {
+    display: flex; flex-direction: column; justify-content: flex-start; gap: 2vh;
+    border-left: 1px solid rgba(196,163,90,.35); padding-left: 2.6vw;
+  }
+  .s14 h2, .s15 h2, .s16 h2 { font-size: 4.2vh; }
+  .s14 p, .s15 p, .s16 p { font-size: 2.35vh; line-height: 1.4; color: #cfc3b0; }
+  .s15 p { font-size: 3.1vh; }
+  .s16 p { font-size: 2.55vh; }
+  .s14 strong, .s15 strong, .s16 strong { color: var(--bone); }
+  .s14 .principles { color: var(--rust); font-size: 2.9vh; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-top: -.4vh; font-family: Syne, sans-serif; }
+  .s15 .era, .s16 .era { color: var(--gold); }
+  .s16 .stack { display: grid; grid-template-rows: 1fr 1fr; gap: 1.4vh; min-height: 0; }
+  .s16 .stack figure { position: relative; margin: 0; min-height: 0; overflow: hidden; outline: 1px solid rgba(196,163,90,.4); }
+  .s16 .stack figure:first-child img { object-fit: contain; object-position: center; background: #1a1510; }
+  .s16 .stack figcaption {
+    position: absolute; left: 0; bottom: 0; padding: .6vh 1vw;
+    background: var(--rust); color: var(--bone); font-size: 1.3vh; font-weight: 650; letter-spacing: .16em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="spine">Bioética · Ciencias de la Salud · UNER · 2026</div>
+<div class="progress"><i id="bar"></i></div>
+<button type="button" class="nav-hit prev" data-dir="-1" aria-label="Slide anterior"><span>‹</span></button>
+<button type="button" class="nav-hit next" data-dir="1" aria-label="Slide siguiente"><span>›</span></button>
+<div class="deck" id="deck">
+
+  <section class="slide s1 on" data-n="1">
+    <div class="bg"><img src="Fotos/fondo-adn.png" alt="Cadena de ADN"></div>
+    <div class="veil"></div>
+    <div class="idx">01<small>/ 16</small></div>
+    <div class="mast">
+      <div class="cat">Cátedra de BIOÉTICA</div>
+      <div class="uni">Ciencias de la Salud / UNER</div>
+    </div>
+    <div class="hero"><h1>BIO<span>ÉTICA</span></h1></div>
+  </section>
+
+  <section class="slide s2" data-n="2">
+    <div class="bg"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
+    <div class="mark">Cátedra de Bioética · Ciclo 2026</div>
+    <div class="idx">02<small>/ 16</small></div>
+    <div class="cap">
+      <h2>1er Práctico de Anatomía</h2>
+      <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
+    </div>
+  </section>
+
+  <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
+    <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="idx">03<small>/ 16</small></div>
+    <div class="note">
+      Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
+      <strong>Hoy, Angelina Jordan</strong>
+    </div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
+    <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="idx">04<small>/ 16</small></div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s5" data-n="5">
+    <div class="bg"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
+    <div class="idx">05<small>/ 16</small></div>
+    <div class="author">
+      <div class="k">Before Bioethics</div>
+      <h2>A History of American Medical Ethics
+        <span>from the Colonial Period to the Bioethics Revolution</span>
+      </h2>
+      <p>Introduce el concepto de tecnologías moralmente disruptivas y explica cómo cambiaron la concepción que los médicos tienen de sus deberes hacia sus pacientes, e impactaron nuestro concepto de vida, muerte y deberes médicos.</p>
+      <div class="who">Robert Baker / USA</div>
+      <img class="portrait" src="Fotos/Foto4.png" alt="Robert Baker">
+    </div>
+  </section>
+
+  <section class="slide s6" data-n="6">
+    <div class="mark">Cátedra de Bioética · UNER</div>
+    <div class="idx">06<small>/ 16</small></div>
+    <div class="stage">
+      <h2>Edades de la Historia</h2>
+      <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
+      <p class="legend">Un mapa del tiempo histórico: de la Prehistoria a la Actualidad.</p>
+    </div>
+  </section>
+
+  <section class="slide s7" data-n="7">
+    <div class="mark">Cátedra de Bioética · UNER</div>
+    <div class="idx">07<small>/ 16</small></div>
+    <div class="stage">
+      <h2>Edades de la Historia</h2>
+      <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
+      <p class="legend">Hablamos del origen y desarrollo de los seres vivos del planeta y su contexto: pero… <strong>¿es ese el principio?</strong></p>
+    </div>
+  </section>
+
+  <section class="slide s8" data-n="8">
+    <div class="bg"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
+    <div class="mark">Paleolítico</div>
+    <div class="idx">08<small>/ 16</small></div>
+    <div class="col">
+      <div class="k">Planeta</div>
+      <h2>Un tiempo que necesitó un planeta para existir</h2>
+      <p>El Paleolítico fue un tiempo que necesitó de un planeta para poder existir, o sea un planeta que lo hiciera posible…</p>
+      <p class="q">¿Cuándo aparece este planeta?<br>(y todos los demás…?)</p>
+    </div>
+  </section>
+
+  <section class="slide s9" data-n="9">
+    <div class="bg"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
+    <div class="mark">Cosmología</div>
+    <div class="idx">09<small>/ 16</small></div>
+    <div class="col">
+      <div class="k">14.000 millones de años</div>
+      <h2>El Big Bang: nace el universo</h2>
+      <p>«La Gran Explosión» alude a un evento en el que materia, espacio y tiempo fueron formados conjuntamente.</p>
+    </div>
+  </section>
+
+  <section class="slide s10" data-n="10">
+    <div class="bg"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
+    <div class="mark">Antigüedad</div>
+    <div class="idx">10<small>/ 16</small></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="k">Big Bang · nace el universo</div>
+        <div class="n">14.000</div>
+        <div class="u">millones de años</div>
+      </div>
+      <div class="stat">
+        <div class="k">Tierra · formación del planeta</div>
+        <div class="n">4.500</div>
+        <div class="u">millones de años</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s11" data-n="11">
+    <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
+    <div class="mark">Origen</div>
+    <div class="idx">11<small>/ 16</small></div>
+    <div class="copy">
+      <h2>Origen ancestral de la Bioética</h2>
+      <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
+    </div>
+  </section>
+
+  <section class="slide s12" data-n="12">
+    <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
+    <div class="mark">Edad Antigua</div>
+    <div class="idx">12<small>/ 16</small></div>
+    <div class="copy">
+      <h2>Orígenes en la Ética y Bioética</h2>
+      <div class="era">Edad Antigua</div>
+      <p>Todos los filósofos mencionados en este período nacen entre los años −470 y −384 a.C. (110 años).</p>
+      <p>En la Grecia antigua:</p>
+      <p>Los filósofos como Sócrates, Platón y Aristóteles, ya discutían temas sobre la buena vida, la justicia y la virtud.</p>
+      <p>La Ética médica se perfiló en esta etapa con el Juramento Hipocrático (siglo V a.C.), que orientaba a los médicos hacia los principios de beneficencia y la no maleficencia.</p>
+    </div>
+  </section>
+
+  <section class="slide s13" data-n="13">
+    <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
+    <div class="mark">Grecia antigua</div>
+    <div class="idx">13<small>/ 16</small></div>
+    <div class="copy">
+      <h2>Los Filósofos griegos y la Ética</h2>
+      <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
+      <p class="spa">S.P.A (Nemotecnia)</p>
+      <p>Platón y Aristóteles fueron discípulos de Sócrates.</p>
+    </div>
+  </section>
+
+  <section class="slide s14" data-n="14">
+    <div class="mark">Edad Antigua</div>
+    <div class="idx">14<small>/ 16</small></div>
+    <div class="pair">
+      <img src="Fotos/Foto12.png" alt="Hipócrates">
+      <div class="copy">
+        <h2>HIPÓCRATES (−460 a.C. – −379 a.C.)</h2>
+        <p>Prestigioso médico de la Antigua Grecia. Considerado el <strong>Padre de la Medicina</strong>. Funda la Escuela Médica que lleva su nombre. Revolucionó la medicina de su época, estableciéndola como una disciplina separada de otros campos con los cuales se la había asociado tradicionalmente (principalmente la <strong>teúrgia</strong> y la filosofía) convirtiendo el ejercicio de la misma en profesión.</p>
+        <p>La Ética hipocrática priorizó los principios de</p>
+        <p class="principles">Beneficencia y no maleficencia</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s15" data-n="15">
+    <div class="mark">Edad Media</div>
+    <div class="idx">15<small>/ 16</small></div>
+    <div class="pair">
+      <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
+      <div class="copy">
+        <h2>Orígenes de la Ética / Bioética</h2>
+        <div class="era">Edad Media</div>
+        <p>En la Edad Media, las discusiones éticas estuvieron fuertemente influenciadas por la <strong>filosofía cristiana</strong>, con autores como <strong>Santo Tomás de Aquino</strong>, quien vinculó la ética con la <strong>ley natural y la dignidad del ser humano</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s16" data-n="16">
+    <div class="mark">Edad Moderna</div>
+    <div class="idx">16<small>/ 16</small></div>
+    <div class="pair">
+      <div class="stack">
+        <figure>
+          <img src="Fotos/Foto14.jpeg" alt="Immanuel Kant">
+          <figcaption>Kant</figcaption>
+        </figure>
+        <figure>
+          <img src="Fotos/Foto15.jpeg" alt="Jeremy Bentham">
+          <figcaption>Bentham</figcaption>
+        </figure>
+      </div>
+      <div class="copy">
+        <h2>Orígenes de la Ética / Bioética</h2>
+        <div class="era">Edad Moderna</div>
+        <p>Durante los siglos XVII y XVIII, con filósofos como <strong>Kant</strong> (Deontologismo) y <strong>Bentham</strong> (Utilitarismo) emergen marcos éticos más racionalistas que influirán en la reflexión sobre el deber profesional.</p>
+        <p><strong>Kant</strong> propuso la importancia de actuar según principios universales, mientras que el <strong>utilitarismo</strong> puso énfasis en maximizar la felicidad general. En el ámbito médico, estas discusiones comenzaron a influir más claramente en la ética clínica.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="bar">
+  <div><b>Mg. Daniel De Michele</b></div>
+  <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
+</div>
+
+<script>
+(function () {
+  document.body.classList.add("js");
+  const slides = [...document.querySelectorAll(".slide")];
+  const bar = document.getElementById("bar");
+  let i = 0;
+  const preview = (id) => "https://drive.google.com/file/d/" + id + "/preview";
+
+  function stopVideos() {
+    document.querySelectorAll("iframe[data-drive]").forEach((f) => f.removeAttribute("src"));
+  }
+  function playVideo(slide) {
+    const id = slide.dataset.video;
+    if (!id) return;
+    const f = slide.querySelector("iframe[data-drive]");
+    if (f) f.src = preview(id);
+  }
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+    if (bar) bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+    stopVideos();
+    playVideo(slides[i]);
+    window.focus();
+  }
+
+  document.addEventListener("click", (e) => {
+    const nav = e.target.closest("[data-dir]");
+    if (!nav) return;
+    e.preventDefault();
+    e.stopPropagation();
+    go(i + Number(nav.dataset.dir));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(i + 1); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); go(i - 1); }
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
+    else if (e.key === "f" || e.key === "F") {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  document.getElementById("deck").addEventListener("click", (e) => {
+    if (e.target.closest("iframe, [data-dir], .note")) return;
+    if (slides[i].dataset.video) return;
+    go(e.clientX / innerWidth < 0.22 ? i - 1 : i + 1);
+  });
+  let x0 = 0;
+  document.addEventListener("touchstart", (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1);
+  }, { passive: true });
+  go(0);
+})();
+</script>
+</body>
+</html>
