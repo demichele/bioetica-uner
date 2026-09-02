@@ -64,7 +64,7 @@
   }
 
   .bar {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 9;
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 17;
     min-height: var(--safe-b);
     padding: 1.8vh 3vw 2vh;
     display: flex; justify-content: space-between; align-items: center; gap: 3vw;
@@ -108,12 +108,6 @@
     text-transform: uppercase;
     text-shadow: 0 10px 50px rgba(0,8,20,.55);
   }
-  .s1 .bar {
-    justify-content: center;
-    background: linear-gradient(180deg, transparent, #07090c 62%);
-    border: 0;
-  }
-  .s1 .bar b { font-size: 2vh; letter-spacing: .06em; }
 
   /* 2 */
   .s2 .dock {
@@ -125,7 +119,7 @@
 
   /* 3 video — inset so edges stay ours; Drive iframe eats keys after play */
   .slide[data-video] .bg {
-    inset: 5.5vh 9.5vw 7.5vh;
+    inset: 5.5vh 9.5vw calc(var(--safe-b) + 1.2vh);
   }
   .nav-hit {
     position: absolute; top: 0; bottom: 0; width: 9vw; z-index: 18;
@@ -141,7 +135,7 @@
   }
   .nav-hit:hover span { opacity: 1; }
   .vid-next {
-    position: absolute; right: 11vw; bottom: 2.2vh; z-index: 19;
+    position: absolute; right: 11vw; bottom: calc(var(--safe-b) + 1.6vh); z-index: 19;
     background: var(--panel); border: 1px solid var(--line); color: var(--txt);
     font: 600 1.5vh/1 "Space Grotesk", sans-serif;
     letter-spacing: .08em; text-transform: uppercase;
@@ -217,17 +211,73 @@
   .stat .n { font-size: 7.2vh; font-weight: 700; letter-spacing: -.05em; line-height: .9; }
   .stat .u { margin-top: 1vh; color: var(--dim); font-size: 1.8vh; font-weight: 500; }
 
-  /* 11 — keep clear of the capital on the left */
-  .s11 .copy {
-    position: absolute; left: 28vw; right: 8vw; top: 14vh; bottom: calc(var(--safe-b) + 2vh);
+  /* 11–12 — light canvas, large copy */
+  .s11 .copy, .s12 .copy {
+    position: absolute; left: 10vw; right: 5vw;
+    top: 10vh; bottom: calc(var(--safe-b) + 1.6vh);
     display: flex; flex-direction: column; justify-content: center;
   }
-  .s11 h2 { font-size: 4.4vh; color: #10202c; margin-bottom: 2.4vh; }
-  .s11 p { font-size: 2.2vh; line-height: 1.45; color: #24323c; font-weight: 500; max-width: 38ch; }
-  .s11 .chip, .s11 .num { color: #1a3a44; }
-  .s11 .chip { background: rgba(255,255,255,.7); border-color: rgba(16,32,44,.12); }
-  .s11 .bar { background: #e7eef0; border-top-color: rgba(16,32,44,.1); color: #4a5c66; }
-  .s11 .bar b { color: #10202c; }
+  .s11 h2, .s12 h2 { font-size: 5.8vh; color: #10202c; margin-bottom: 2.8vh; }
+  .s12 h2 { font-size: 4.8vh; }
+  .s11 p, .s12 p { line-height: 1.42; color: #24323c; font-weight: 500; max-width: none; }
+  .s11 p { font-size: 3.8vh; }
+  .s12 p { font-size: 2.7vh; }
+  .s11 p + p, .s12 p + p { margin-top: 1.8vh; }
+  .s11 strong, .s12 strong { font-weight: 700; color: #10202c; }
+  .s11 u, .s12 u { text-underline-offset: .16em; text-decoration-thickness: 2px; }
+  .s12 .era {
+    color: #1a6b72; font-size: 2.2vh; letter-spacing: .2em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 2vh;
+  }
+  .s11 .chip, .s11 .num, .s12 .chip, .s12 .num { color: #1a3a44; }
+  .s11 .chip, .s12 .chip { background: rgba(255,255,255,.7); border-color: rgba(16,32,44,.12); }
+
+  /* 13 — full-bleed; keep heads and lower faces in frame */
+  .s13 { background: #d4c7ae; }
+  .s13 .bg { top: 0; }
+  .s13 .bg img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    transform: none;
+  }
+  .s13 .copy {
+    position: absolute; left: 3vw; right: 3vw;
+    bottom: calc(var(--safe-b) + 2.4vh); z-index: 5;
+    max-width: 62vw;
+  }
+  .s13 h2 { font-size: 3.6vh; margin-bottom: 1.6vh; }
+  .s13 p { font-size: 2.05vh; line-height: 1.4; font-weight: 500; color: var(--dim); }
+  .s13 p + p { margin-top: 1.4vh; }
+  .s13 .spa { color: var(--acc); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 1.9vh; }
+
+  /* 14–15 — photo left, copy right */
+  .s14, .s15 { background: #0b0f14; }
+  .s14 .pair, .s15 .pair {
+    position: absolute; inset: 8vh 4vw calc(var(--safe-b) + 2.2vh);
+    display: grid; grid-template-columns: min(54vh, 44vw) 1fr; gap: 2.8vw;
+    align-items: stretch;
+  }
+  .s14 .pair img, .s15 .pair img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 8%;
+  }
+  .s14 .copy, .s15 .copy {
+    display: flex; flex-direction: column; justify-content: flex-start; gap: 2.2vh; min-height: 0;
+  }
+  .s14 h2, .s15 h2 { font-size: 4.6vh; }
+  .s14 p, .s15 p { font-size: 2.7vh; line-height: 1.4; font-weight: 500; color: var(--dim); }
+  .s14 strong, .s15 strong { color: var(--txt); font-weight: 700; }
+  .s14 .principles {
+    color: var(--acc); font-size: 3.2vh; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; line-height: 1.25;
+    margin-top: -.6vh;
+  }
+  .s15 .era {
+    color: var(--acc); font-size: 2.4vh; letter-spacing: .2em;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .s15 .era + p { margin-top: -.4vh; }
+  .s15 p { font-size: 3.4vh; line-height: 1.42; }
 </style>
 </head>
 <body>
@@ -242,28 +292,23 @@
       <div class="cat">Cátedra de BIOÉTICA</div>
       <div class="uni">Ciencias de la Salud / UNER</div>
     </div>
-    <div class="chrome num">01 / 11</div>
+    <div class="chrome num">01 / 15</div>
     <div class="hero"><h1>BIOÉTICA</h1></div>
-    <div class="bar"><b>Mg. Daniel De Michele</b></div>
   </section>
 
   <section class="slide s2" data-n="2">
     <div class="bg"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
     <div class="chrome chip">Cátedra de Bioética · Ciclo 2026</div>
-    <div class="chrome num">02 / 11</div>
+    <div class="chrome num">02 / 15</div>
     <div class="dock panel">
       <h2>1er Práctico de Anatomía</h2>
       <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
-    </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
     </div>
   </section>
 
   <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
     <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">03 / 11</div>
+    <div class="chrome num">03 / 15</div>
     <div class="note panel">
       Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
       <strong>Hoy, Angelina Jordan</strong>
@@ -273,13 +318,13 @@
 
   <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
     <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">04 / 11</div>
+    <div class="chrome num">04 / 15</div>
     <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s5" data-n="5">
     <div class="bg"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
-    <div class="chrome num">05 / 11</div>
+    <div class="chrome num">05 / 15</div>
     <div class="author">
       <div class="panel">
         <div class="k">Before Bioethics</div>
@@ -291,75 +336,55 @@
         <img class="portrait" src="Fotos/Foto4.png" alt="Robert Baker">
       </div>
     </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
-    </div>
   </section>
 
   <section class="slide s6" data-n="6">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">06 / 11</div>
+    <div class="chrome num">06 / 15</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
       <p class="legend">Un mapa del tiempo histórico: de la Prehistoria a la Actualidad.</p>
     </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
-    </div>
   </section>
 
   <section class="slide s7" data-n="7">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">07 / 11</div>
+    <div class="chrome num">07 / 15</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
       <p class="legend">Hablamos del origen y desarrollo de los seres vivos del planeta y su contexto: pero… <strong>¿es ese el principio?</strong></p>
-    </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
     </div>
   </section>
 
   <section class="slide s8" data-n="8">
     <div class="bg"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
     <div class="chrome chip">Paleolítico</div>
-    <div class="chrome num">08 / 11</div>
+    <div class="chrome num">08 / 15</div>
     <div class="dock-l panel">
       <div class="k">Planeta</div>
       <h2>Un tiempo que necesitó un planeta para existir</h2>
       <p>El Paleolítico fue un tiempo que necesitó de un planeta para poder existir, o sea un planeta que lo hiciera posible…</p>
       <p class="q">¿Cuándo aparece este planeta?<br>(y todos los demás…?)</p>
     </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
-    </div>
   </section>
 
   <section class="slide s9" data-n="9">
     <div class="bg"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
     <div class="chrome chip">Cosmología</div>
-    <div class="chrome num">09 / 11</div>
+    <div class="chrome num">09 / 15</div>
     <div class="dock-l panel">
       <div class="k">14.000 millones de años</div>
       <h2>El Big Bang: nace el universo</h2>
       <p>«La Gran Explosión» alude a un evento en el que materia, espacio y tiempo fueron formados conjuntamente.</p>
-    </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
     </div>
   </section>
 
   <section class="slide s10" data-n="10">
     <div class="bg"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
     <div class="chrome chip">Antigüedad</div>
-    <div class="chrome num">10 / 11</div>
+    <div class="chrome num">10 / 15</div>
     <div class="stats">
       <div class="stat panel">
         <div class="k">Big Bang · nace el universo</div>
@@ -372,25 +397,74 @@
         <div class="u">millones de años</div>
       </div>
     </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
-    </div>
   </section>
 
   <section class="slide s11" data-n="11">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Origen</div>
-    <div class="chrome num">11 / 11</div>
+    <div class="chrome num">11 / 15</div>
     <div class="copy">
       <h2>Origen ancestral de la Bioética</h2>
-      <p>La Bioética es una rama actual de la ética filosófica griega (siglo XX / años 70), que analizaba los principios del bien y del mal en las acciones humanas. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
-    </div>
-    <div class="bar">
-      <div><b>Mg. Daniel De Michele</b></div>
-      <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
+      <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
     </div>
   </section>
+
+  <section class="slide s12" data-n="12">
+    <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
+    <div class="chrome chip">Edad Antigua</div>
+    <div class="chrome num">12 / 15</div>
+    <div class="copy">
+      <h2>Orígenes en la Ética y Bioética</h2>
+      <div class="era">Edad Antigua</div>
+      <p>Todos los filósofos mencionados en este período nacen entre los años −470 y −384 a.C. (110 años).</p>
+      <p>En la Grecia antigua:</p>
+      <p>Los filósofos como Sócrates, Platón y Aristóteles, ya discutían temas sobre la buena vida, la justicia y la virtud.</p>
+      <p>La Ética médica se perfiló en esta etapa con el Juramento Hipocrático (siglo V a.C.), que orientaba a los médicos hacia los principios de beneficencia y la no maleficencia.</p>
+    </div>
+  </section>
+
+  <section class="slide s13" data-n="13">
+    <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
+    <div class="chrome chip">Grecia antigua</div>
+    <div class="chrome num">13 / 15</div>
+    <div class="copy panel">
+      <h2>Los Filósofos griegos y la Ética</h2>
+      <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
+      <p class="spa">S.P.A (Nemotecnia)</p>
+      <p>Platón y Aristóteles fueron discípulos de Sócrates.</p>
+    </div>
+  </section>
+
+  <section class="slide s14" data-n="14">
+    <div class="chrome chip">Edad Antigua</div>
+    <div class="chrome num">14 / 15</div>
+    <div class="pair">
+      <img src="Fotos/Foto12.png" alt="Hipócrates">
+      <div class="copy">
+        <h2>HIPÓCRATES (−460 a.C. – −379 a.C.)</h2>
+        <p>Prestigioso médico de la Antigua Grecia. Considerado el <strong>Padre de la Medicina</strong>. Funda la Escuela Médica que lleva su nombre. Revolucionó la medicina de su época, estableciéndola como una disciplina separada de otros campos con los cuales se la había asociado tradicionalmente (principalmente la <strong>teúrgia</strong> y la filosofía) convirtiendo el ejercicio de la misma en profesión.</p>
+        <p>La Ética hipocrática priorizó los principios de</p>
+        <p class="principles">Beneficencia y no maleficencia</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s15" data-n="15">
+    <div class="chrome chip">Edad Media</div>
+    <div class="chrome num">15 / 15</div>
+    <div class="pair">
+      <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
+      <div class="copy">
+        <h2>Orígenes de la Ética / Bioética</h2>
+        <div class="era">Edad Media</div>
+        <p>En la Edad Media, las discusiones éticas estuvieron fuertemente influenciadas por la <strong>filosofía cristiana</strong>, con autores como <strong>Santo Tomás de Aquino</strong>, quien vinculó la ética con la <strong>ley natural y la dignidad del ser humano</strong>.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="bar">
+  <div><b>Mg. Daniel De Michele</b></div>
+  <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
 </div>
 
 <script>
