@@ -590,41 +590,25 @@
     border-color: rgba(16,32,44,.16);
   }
 
-  .s31 .map {
-    flex: 1; min-height: 0;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    column-gap: 0;
-    align-items: stretch;
+  .s31 .copy { justify-content: center; }
+  .s31 .funcs {
+    list-style: none;
+    counter-reset: fn;
+    display: flex; flex-direction: column; gap: 2.6vh;
   }
-  .s31 .ball {
-    grid-row: 1 / -1;
-    align-self: center;
-    width: 20vh; height: 20vh;
-    border-radius: 50%;
-    background: #0e4f4a;
-    color: #fff;
-    font-size: 11vh; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    letter-spacing: -.04em;
-    box-shadow: 0 0 0 6px rgba(62,224,198,.35);
-    z-index: 1;
-  }
-  .s31 .item {
-    display: flex; align-items: center;
+  .s31 .funcs li {
+    counter-increment: fn;
+    display: flex; align-items: center; gap: 1.8vw;
     color: #10202c;
-    font-size: 3.15vh; font-weight: 700;
-    letter-spacing: -.02em;
-    line-height: 1.15;
+    font-size: 4.8vh; font-weight: 700;
+    letter-spacing: -.03em; line-height: 1.12;
   }
-  .s31 .item i {
-    display: block;
-    height: 4px;
-    width: 7vw;
-    margin-right: 1.6vw;
-    background: var(--acc);
-    flex: 0 0 7vw;
+  .s31 .funcs li::before {
+    content: counter(fn) ".";
+    color: #0e4f4a;
+    font-size: 1.05em;
+    flex: 0 0 2.2ch;
+    text-align: right;
   }
 
   .s32 .copy, .s33 .copy {
@@ -1050,12 +1034,11 @@
     <div class="chrome chip">Funciones</div>
     <div class="chrome num">31 / 33</div>
     <div class="copy">
-      <div class="map">
-        <div class="ball">3</div>
-        <div class="item"><i></i>BIOETICA EN INVESTIGACION Y PUBLICACION</div>
-        <div class="item"><i></i>BIOETICA EN MEDICAMENTOS</div>
-        <div class="item"><i></i>BIOETICAS EN PROCEDIMIENTOS</div>
-      </div>
+      <ol class="funcs">
+        <li>BIOETICA EN INVESTIGACION Y PUBLICACION</li>
+        <li>BIOETICA EN MEDICAMENTOS</li>
+        <li>BIOETICAS EN PROCEDIMIENTOS</li>
+      </ol>
     </div>
   </section>
 
