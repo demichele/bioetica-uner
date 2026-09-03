@@ -15,7 +15,7 @@
     --txt: #f5f7f8;
     --dim: rgba(245,247,248,.62);
     --acc: #3ee0c6;
-    --safe-b: 9.5vh;
+    --safe-b: 11.5vh;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; background: var(--bg); overflow: hidden; }
@@ -70,10 +70,15 @@
     display: flex; justify-content: space-between; align-items: center; gap: 3vw;
     background: #07090c;
     border-top: 1px solid var(--line);
-    font-size: 1.35vh; line-height: 1.35; color: var(--dim);
+    font-size: 1.9vh; line-height: 1.4; color: var(--dim);
   }
-  .bar b { display: block; color: var(--txt); font-weight: 600; font-size: 1.5vh; letter-spacing: .04em; }
-  .bar .inst { text-align: right; }
+  .bar b { display: block; color: var(--txt); font-weight: 600; font-size: 2.2vh; letter-spacing: .04em; }
+  .bar .inst { text-align: right; font-size: 1.9vh; }
+  .bar .mail {
+    display: block; margin-top: .4vh;
+    color: var(--txt); font-weight: 500; font-size: 1.9vh;
+    text-decoration: none;
+  }
 
   .panel {
     background: var(--panel);
@@ -566,10 +571,9 @@
   }
   .s28 .docs li { padding-left: 1.4vw; border-left: 4px solid var(--acc); }
 
+  .s29 .copy { justify-content: center; }
   .s29 .blocks {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: space-between;
-    gap: 2vh;
+    display: flex; flex-direction: column; gap: 2.6vh;
   }
   .s29 p {
     color: #24323c; font-size: 2.85vh; font-weight: 500; line-height: 1.32;
@@ -1063,7 +1067,10 @@
   </section>
 </div>
 <div class="bar">
-  <div><b>Mg Daniel De Michele</b></div>
+  <div>
+    <b>Mg Daniel De Michele</b>
+    <a class="mail" href="mailto:eljibaro2002@gmail.com">Email: eljibaro2002@gmail.com</a>
+  </div>
   <div class="inst">Ciclo Complementacion Curricular<br>Ciencias de la Salud / UNER / Entre Ríos /2026</div>
 </div>
 
