@@ -331,9 +331,9 @@
   }
 
   /* 18–20, 22, 24–25 — Foto5, large definitions */
-  .s18, .s19, .s20, .s21, .s22, .s24, .s25, .s27 { background: #d4ebe4; }
-  .s18 .bg, .s19 .bg, .s20 .bg, .s21 .bg, .s22 .bg, .s24 .bg, .s25 .bg, .s27 .bg { filter: saturate(.85); }
-  .s18 .bg::after, .s19 .bg::after, .s20 .bg::after, .s21 .bg::after, .s22 .bg::after, .s24 .bg::after, .s25 .bg::after, .s27 .bg::after {
+  .s18, .s19, .s20, .s21, .s22, .s24, .s25, .s27, .s28, .s29, .s30, .s31, .s32, .s33 { background: #d4ebe4; }
+  .s18 .bg, .s19 .bg, .s20 .bg, .s21 .bg, .s22 .bg, .s24 .bg, .s25 .bg, .s27 .bg, .s28 .bg, .s29 .bg, .s30 .bg, .s31 .bg, .s32 .bg, .s33 .bg { filter: saturate(.85); }
+  .s18 .bg::after, .s19 .bg::after, .s20 .bg::after, .s21 .bg::after, .s22 .bg::after, .s24 .bg::after, .s25 .bg::after, .s27 .bg::after, .s28 .bg::after, .s29 .bg::after, .s30 .bg::after, .s31 .bg::after, .s32 .bg::after, .s33 .bg::after {
     content: "";
     position: absolute; inset: 0;
     background: linear-gradient(95deg, rgba(212,235,228,.18) 0%, rgba(212,235,228,.55) 28%, rgba(212,235,228,.88) 58%);
@@ -374,8 +374,15 @@
   .s22 .chip, .s22 .num,
   .s24 .chip, .s24 .num,
   .s25 .chip, .s25 .num,
-  .s27 .chip, .s27 .num { color: #1a3a44; }
-  .s18 .chip, .s19 .chip, .s20 .chip, .s21 .chip, .s22 .chip, .s24 .chip, .s25 .chip, .s27 .chip {
+  .s27 .chip, .s27 .num,
+  .s28 .chip, .s28 .num,
+  .s29 .chip, .s29 .num,
+  .s30 .chip, .s30 .num,
+  .s31 .chip, .s31 .num,
+  .s32 .chip, .s32 .num,
+  .s33 .chip, .s33 .num { color: #1a3a44; }
+  .s18 .chip, .s19 .chip, .s20 .chip, .s21 .chip, .s22 .chip, .s24 .chip, .s25 .chip, .s27 .chip,
+  .s28 .chip, .s29 .chip, .s30 .chip, .s31 .chip, .s32 .chip, .s33 .chip {
     background: rgba(255,255,255,.72); border-color: rgba(16,32,44,.12);
   }
 
@@ -531,6 +538,118 @@
     cursor: pointer;
   }
   .s27 .modal-x:hover { color: #10202c; }
+
+  /* 28–33 — 70% of the page */
+  .s28 .copy, .s29 .copy, .s30 .copy, .s31 .copy, .s32 .copy, .s33 .copy {
+    position: absolute;
+    left: 15%; top: 15%;
+    width: 70%; height: 70%;
+    display: flex; flex-direction: column;
+    z-index: 5;
+  }
+  .s28 h1, .s29 h1, .s30 h1, .s31 h1 {
+    font-size: 4.2vh;
+    color: #10202c;
+    letter-spacing: -.03em;
+    line-height: 1.08;
+    font-weight: 700;
+    margin-bottom: 2vh;
+  }
+  .s28 .docs {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: space-between;
+    list-style: none;
+    color: #24323c;
+    font-size: 2.55vh;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .s28 .docs li { padding-left: 1.4vw; border-left: 4px solid var(--acc); }
+
+  .s29 .blocks {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: space-between;
+    gap: 2vh;
+  }
+  .s29 p {
+    color: #24323c; font-size: 2.85vh; font-weight: 500; line-height: 1.32;
+    border-left: 4px solid var(--acc); padding-left: 1.5vw;
+  }
+  .s29 strong { color: #10202c; font-weight: 700; }
+
+  .s30[data-video] .bg { inset: 0; }
+  .s30 h1 { text-align: center; font-size: 3.8vh; margin-bottom: 1.6vh; }
+  .s30 .vid {
+    flex: 1; min-height: 0;
+    background: #0b0f14;
+  }
+  .s30 .vid iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .s30 .vid-next {
+    color: #10202c;
+    background: rgba(255,255,255,.88);
+    border-color: rgba(16,32,44,.16);
+  }
+
+  .s31 .map {
+    flex: 1; min-height: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 0;
+    align-items: stretch;
+  }
+  .s31 .ball {
+    grid-row: 1 / -1;
+    align-self: center;
+    width: 20vh; height: 20vh;
+    border-radius: 50%;
+    background: #0e4f4a;
+    color: #fff;
+    font-size: 11vh; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: -.04em;
+    box-shadow: 0 0 0 6px rgba(62,224,198,.35);
+    z-index: 1;
+  }
+  .s31 .item {
+    display: flex; align-items: center;
+    color: #10202c;
+    font-size: 3.15vh; font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .s31 .item i {
+    display: block;
+    height: 4px;
+    width: 7vw;
+    margin-right: 1.6vw;
+    background: var(--acc);
+    flex: 0 0 7vw;
+  }
+
+  .s32 .copy, .s33 .copy {
+    justify-content: center; align-items: center; text-align: center;
+  }
+  .s32 p {
+    color: #10202c;
+    font-size: 5.4vh; font-weight: 600; line-height: 1.22;
+    max-width: 16ch;
+  }
+  .s33 h1 {
+    font-size: clamp(56px, 14vh, 160px);
+    color: #0e4f4a;
+    letter-spacing: -.04em;
+    line-height: .9;
+    margin-bottom: 2.8vh;
+  }
+  .s33 .bye {
+    color: #24323c; font-size: 4vh; font-weight: 600; line-height: 1.25;
+  }
+  .s33 .mail {
+    margin-top: 2.2vh;
+    color: #1a6b72; font-size: 2.8vh; font-weight: 600;
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
@@ -545,14 +664,14 @@
       <div class="cat">Cátedra de BIOÉTICA</div>
       <div class="uni">Ciencias de la Salud / UNER</div>
     </div>
-    <div class="chrome num">01 / 27</div>
+    <div class="chrome num">01 / 33</div>
     <div class="hero"><h1>BIOÉTICA</h1></div>
   </section>
 
   <section class="slide s2" data-n="2">
     <div class="bg"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
     <div class="chrome chip">Cátedra de Bioética · Ciclo 2026</div>
-    <div class="chrome num">02 / 27</div>
+    <div class="chrome num">02 / 33</div>
     <div class="dock panel">
       <h2>1er Práctico de Anatomía</h2>
       <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
@@ -561,7 +680,7 @@
 
   <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
     <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">03 / 27</div>
+    <div class="chrome num">03 / 33</div>
     <div class="note panel">
       Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
       <strong>Hoy, Angelina Jordan</strong>
@@ -571,13 +690,13 @@
 
   <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
     <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">04 / 27</div>
+    <div class="chrome num">04 / 33</div>
     <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s5" data-n="5">
     <div class="bg"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
-    <div class="chrome num">05 / 27</div>
+    <div class="chrome num">05 / 33</div>
     <div class="author">
       <div class="panel">
         <div class="k">Before Bioethics</div>
@@ -593,7 +712,7 @@
 
   <section class="slide s6" data-n="6">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">06 / 27</div>
+    <div class="chrome num">06 / 33</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
@@ -603,7 +722,7 @@
 
   <section class="slide s7" data-n="7">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">07 / 27</div>
+    <div class="chrome num">07 / 33</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
@@ -614,7 +733,7 @@
   <section class="slide s8" data-n="8">
     <div class="bg"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
     <div class="chrome chip">Paleolítico</div>
-    <div class="chrome num">08 / 27</div>
+    <div class="chrome num">08 / 33</div>
     <div class="dock-l panel">
       <div class="k">Planeta</div>
       <h2>Un tiempo que necesitó un planeta para existir</h2>
@@ -626,7 +745,7 @@
   <section class="slide s9" data-n="9">
     <div class="bg"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
     <div class="chrome chip">Cosmología</div>
-    <div class="chrome num">09 / 27</div>
+    <div class="chrome num">09 / 33</div>
     <div class="dock-l panel">
       <div class="k">14.000 millones de años</div>
       <h2>El Big Bang: nace el universo</h2>
@@ -637,7 +756,7 @@
   <section class="slide s10" data-n="10">
     <div class="bg"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
     <div class="chrome chip">Antigüedad</div>
-    <div class="chrome num">10 / 27</div>
+    <div class="chrome num">10 / 33</div>
     <div class="stats">
       <div class="stat panel">
         <div class="k">Big Bang · nace el universo</div>
@@ -655,7 +774,7 @@
   <section class="slide s11" data-n="11">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Origen</div>
-    <div class="chrome num">11 / 27</div>
+    <div class="chrome num">11 / 33</div>
     <div class="copy">
       <h2>Origen ancestral de la Bioética</h2>
       <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
@@ -665,7 +784,7 @@
   <section class="slide s12" data-n="12">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">12 / 27</div>
+    <div class="chrome num">12 / 33</div>
     <div class="copy">
       <h2>Orígenes en la Ética y Bioética</h2>
       <div class="era">Edad Antigua</div>
@@ -679,7 +798,7 @@
   <section class="slide s13" data-n="13">
     <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
     <div class="chrome chip">Grecia antigua</div>
-    <div class="chrome num">13 / 27</div>
+    <div class="chrome num">13 / 33</div>
     <div class="copy panel">
       <h2>Los Filósofos griegos y la Ética</h2>
       <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
@@ -690,7 +809,7 @@
 
   <section class="slide s14" data-n="14">
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">14 / 27</div>
+    <div class="chrome num">14 / 33</div>
     <div class="pair">
       <img src="Fotos/Foto12.png" alt="Hipócrates">
       <div class="copy">
@@ -704,7 +823,7 @@
 
   <section class="slide s15" data-n="15">
     <div class="chrome chip">Edad Media</div>
-    <div class="chrome num">15 / 27</div>
+    <div class="chrome num">15 / 33</div>
     <div class="pair">
       <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
       <div class="copy">
@@ -717,7 +836,7 @@
 
   <section class="slide s16" data-n="16">
     <div class="chrome chip">Edad Moderna</div>
-    <div class="chrome num">16 / 27</div>
+    <div class="chrome num">16 / 33</div>
     <div class="pair">
       <div class="stack">
         <figure>
@@ -740,7 +859,7 @@
 
   <section class="slide s17" data-n="17">
     <div class="chrome chip">1970</div>
-    <div class="chrome num">17 / 27</div>
+    <div class="chrome num">17 / 33</div>
     <div class="pair">
       <img src="Fotos/Foto16.jpg" alt="Van Rensselaer Potter">
       <div class="copy">
@@ -754,7 +873,7 @@
   <section class="slide s18" data-n="18">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Definición</div>
-    <div class="chrome num">18 / 27</div>
+    <div class="chrome num">18 / 33</div>
     <div class="copy">
       <h2>LA ETICA</h2>
       <p>La ética estudia la moral y determina qué es lo bueno y, desde este punto de vista, cómo se debe actuar. Es decir, es la teoría o la ciencia del comportamiento moral.</p>
@@ -766,7 +885,7 @@
   <section class="slide s19" data-n="19">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Juicios</div>
-    <div class="chrome num">19 / 27</div>
+    <div class="chrome num">19 / 33</div>
     <div class="copy">
       <h2>LA ETICA</h2>
       <p>Etica (Latín ethica "filosofía moral") proviene del griego "Ethikos" cuyo significado es Carácter. Tiene como objeto de estudio la moral y la acción humana. Su estudio se remonta a los orígenes de la filosofía moral en la Grecia clásica</p>
@@ -779,7 +898,7 @@
   <section class="slide s20" data-n="20">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Alcance</div>
-    <div class="chrome num">20 / 27</div>
+    <div class="chrome num">20 / 33</div>
     <div class="copy">
       <h2>LA BIOETICA</h2>
       <p>Disciplina nueva, el término Bioética se usó por primera vez hace 50 años (Potter)</p>
@@ -792,7 +911,7 @@
   <section class="slide s21" data-n="21">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Dos palabras</div>
-    <div class="chrome num">21 / 27</div>
+    <div class="chrome num">21 / 33</div>
     <div class="copy">
       <p class="ask">Si tuviera que definir la Ética con 2 palabras sería …</p>
       <div class="otro">el OTRO/A</div>
@@ -804,7 +923,7 @@
   <section class="slide s22" data-n="22">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Objeto de estudio</div>
-    <div class="chrome num">22 / 27</div>
+    <div class="chrome num">22 / 33</div>
     <div class="copy">
       <h1>BIOETICA</h1>
       <h2>Objeto de estudio</h2>
@@ -815,7 +934,7 @@
 
   <section class="slide s23" data-n="23" data-video="1VxS2-fNFF0v-GVvd6uVbZM0Uh7esUxpE">
     <div class="bg"><iframe data-drive title="Ignacio Maglio" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">23 / 27</div>
+    <div class="chrome num">23 / 33</div>
     <div class="note panel">
       Ignacio Maglio
       <strong>Fundación Huésped</strong>
@@ -826,7 +945,7 @@
   <section class="slide s24" data-n="24">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Sujeto / objeto</div>
-    <div class="chrome num">24 / 27</div>
+    <div class="chrome num">24 / 33</div>
     <div class="copy">
       <p class="quote">A partir del Siglo XVII el modelo de la Medicina no habla de "una persona", sino de el órgano afectado. (un higado cirrotico, de un corazón dañado) es decir se paso del sujeto a un objeto (vinculado al sujeto).</p>
       <p class="quote">A mi -ingresante de hace 50 años- cursando Anatomía, me pusieron el 1er día, un muerto cortado al medio y sus huesos en la mesa. En Fisiología, una rata y finalmente mucho mas adelante me pondrián frente a una persosa, un paciente...</p>
@@ -837,7 +956,7 @@
   <section class="slide s25" data-n="25">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Cosificación</div>
-    <div class="chrome num">25 / 27</div>
+    <div class="chrome num">25 / 33</div>
     <div class="copy">
       <h1>DESHUMANIZACIÓN/ DESPERSONALIZACIÓN/COSIFICACION</h1>
       <div class="quotes">
@@ -849,7 +968,7 @@
 
   <section class="slide s26" data-n="26">
     <div class="chrome chip">Conflictos humanos</div>
-    <div class="chrome num">26 / 27</div>
+    <div class="chrome num">26 / 33</div>
     <div class="pair">
       <img src="Fotos/Foto17.jpg" alt="Niños sobrevivientes de Auschwitz, enero 1945">
       <div class="copy">
@@ -863,7 +982,7 @@
   <section class="slide s27" data-n="27">
     <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
     <div class="chrome chip">Principios</div>
-    <div class="chrome num">27 / 27</div>
+    <div class="chrome num">27 / 33</div>
     <div class="terms">
       <button type="button" class="term" data-term="autonomia">AUTONOMIA</button>
       <button type="button" class="term" data-term="beneficiencia">BENEFICIENCIA</button>
@@ -877,6 +996,86 @@
         <h2 id="modal-title"></h2>
         <p id="modal-body"></p>
       </div>
+    </div>
+  </section>
+
+  <section class="slide s28" data-n="28">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Documentos</div>
+    <div class="chrome num">28 / 33</div>
+    <div class="copy">
+      <h1>DOCUMENTOS INTERNACIONALES DE INTERES BIOETICO</h1>
+      <ul class="docs">
+        <li>Declaracion Derechos Humanos (1948)</li>
+        <li>Código de Nuremberg (1947)</li>
+        <li>Declaracion de Helsinki (1964)</li>
+        <li>Declaracion de Tokyo (1975)</li>
+        <li>Declaración de Manila (1980)</li>
+        <li>Informe Belmont (1979)</li>
+        <li>Genoma y Derechos Humanos (1997)</li>
+        <li>Datos Geneticos Humanos (2003)</li>
+        <li>Bioeticos y Derechos Humanos (2005)</li>
+        <li>Acuerdo deParis Calentamiento Global (2016)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide s29" data-n="29">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Otros principios</div>
+    <div class="chrome num">29 / 33</div>
+    <div class="copy">
+      <h1>OTROS PRINCIPIOS DE LA BIOETICA</h1>
+      <div class="blocks">
+        <p><strong>1- Principio de inviolabilidad</strong><br>Prohibición de someter a las personas a privaciones o sacrificios que lo perjudiquen. Es inherente a la condicion humana y la dignidad</p>
+        <p><strong>2- Universalidad, igualdad, equidad y solidaridad</strong></p>
+        <p><strong>3 - Etica y administracion:</strong> Economia de la salud-Instauracion del PMO</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s30" data-n="30" data-video="1HgS3bHj7T3TnCQKKP3XPBjd8anhtNauG">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Comités</div>
+    <div class="chrome num">30 / 33</div>
+    <div class="copy">
+      <h1>¿ PARA QUE SIRVEN LOS COMITES DE ETICA ?</h1>
+      <div class="vid"><iframe data-drive title="Comités de ética" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    </div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s31" data-n="31">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Funciones</div>
+    <div class="chrome num">31 / 33</div>
+    <div class="copy">
+      <div class="map">
+        <div class="ball">3</div>
+        <div class="item"><i></i>BIOETICA EN INVESTIGACION Y PUBLICACION</div>
+        <div class="item"><i></i>BIOETICA EN MEDICAMENTOS</div>
+        <div class="item"><i></i>BIOETICAS EN PROCEDIMIENTOS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s32" data-n="32">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Debate</div>
+    <div class="chrome num">32 / 33</div>
+    <div class="copy">
+      <p>Ahora siguen las conversaciones/debates<br>para aclarar dudas...</p>
+    </div>
+  </section>
+
+  <section class="slide s33" data-n="33">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Cierre</div>
+    <div class="chrome num">33 / 33</div>
+    <div class="copy">
+      <h1>Bioética</h1>
+      <p class="bye">Nos vemos en el proximo encuentro!</p>
+      <a class="mail" href="mailto:eljibaro2002@gmail.com">Email: eljibaro2002@gmail.com</a>
     </div>
   </section>
 </div>
@@ -989,7 +1188,7 @@
     }
   });
   document.getElementById("deck").addEventListener("click", (e) => {
-    if (e.target.closest("iframe, [data-dir], .note, [data-term], .modal")) return;
+    if (e.target.closest("iframe, [data-dir], .note, [data-term], .modal, a")) return;
     if (modalOpen()) return;
     if (slides[i].dataset.video) return;
     go(e.clientX / innerWidth < 0.22 ? i - 1 : i + 1);
