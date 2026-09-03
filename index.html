@@ -308,6 +308,229 @@
   }
   .s16 p { font-size: 2.95vh; line-height: 1.42; font-weight: 500; color: var(--dim); }
   .s16 strong { color: var(--txt); font-weight: 700; }
+
+  /* 17 — Potter, photo left / large copy right */
+  .s17 { background: #0b0f14; }
+  .s17 .pair {
+    position: absolute; inset: 8vh 4vw calc(var(--safe-b) + 2.2vh);
+    display: grid; grid-template-columns: min(48vh, 36vw) 1fr; gap: 2.8vw;
+    align-items: stretch;
+  }
+  .s17 .pair img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  }
+  .s17 .copy {
+    display: flex; flex-direction: column; justify-content: flex-start;
+    gap: 2vh; min-height: 0;
+  }
+  .s17 h2 { font-size: 5vh; line-height: .94; }
+  .s17 h2 span { display: block; color: var(--acc); font-size: 1.18em; margin-top: .3vh; }
+  .s17 .lead { color: var(--acc); font-size: 3.6vh; font-weight: 600; line-height: 1.28; }
+  .s17 .copy > p:last-child {
+    font-size: 5.05vh; line-height: 1.3; font-weight: 500; color: var(--dim);
+  }
+
+  /* 18–20, 22, 24–25 — Foto5, large definitions */
+  .s18, .s19, .s20, .s21, .s22, .s24, .s25, .s27 { background: #d4ebe4; }
+  .s18 .bg, .s19 .bg, .s20 .bg, .s21 .bg, .s22 .bg, .s24 .bg, .s25 .bg, .s27 .bg { filter: saturate(.85); }
+  .s18 .bg::after, .s19 .bg::after, .s20 .bg::after, .s21 .bg::after, .s22 .bg::after, .s24 .bg::after, .s25 .bg::after, .s27 .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(95deg, rgba(212,235,228,.18) 0%, rgba(212,235,228,.55) 28%, rgba(212,235,228,.88) 58%);
+  }
+  .s18 .copy, .s19 .copy, .s20 .copy, .s22 .copy {
+    position: absolute; left: 8vw; right: 5vw;
+    top: 8.5vh; bottom: calc(var(--safe-b) + 1.8vh);
+    display: flex; flex-direction: column; justify-content: center;
+    z-index: 5;
+  }
+  .s18 h2, .s19 h2, .s20 h2, .s22 h1 {
+    font-size: 6.4vh; color: #10202c; letter-spacing: -.04em; margin-bottom: 2vh;
+  }
+  .s22 h1 { font-size: 6.6vh; margin-bottom: .6vh; }
+  .s22 h2 {
+    font-size: 2.8vh; color: #1a6b72; letter-spacing: .16em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 2.2vh;
+  }
+  .s18 p, .s19 p, .s20 p, .s22 p {
+    color: #24323c; font-weight: 500; line-height: 1.38;
+  }
+  .s18 p { font-size: 3.15vh; }
+  .s19 p { font-size: 2.4vh; }
+  .s20 p { font-size: 3.15vh; }
+  .s22 p { font-size: 2.8vh; }
+  .s18 p + p, .s19 p + p, .s20 p + p, .s22 p + p { margin-top: 1.5vh; }
+  .s18 .cite { color: #10202c; font-weight: 600; }
+  .s19 .ex { color: #1a6b72; font-weight: 600; }
+  .s20 .stress { color: #10202c; font-weight: 700; }
+  .s22 .quote {
+    border-left: 4px solid var(--acc);
+    padding-left: 1.5vw;
+  }
+  .s18 .chip, .s18 .num,
+  .s19 .chip, .s19 .num,
+  .s20 .chip, .s20 .num,
+  .s21 .chip, .s21 .num,
+  .s22 .chip, .s22 .num,
+  .s24 .chip, .s24 .num,
+  .s25 .chip, .s25 .num,
+  .s27 .chip, .s27 .num { color: #1a3a44; }
+  .s18 .chip, .s19 .chip, .s20 .chip, .s21 .chip, .s22 .chip, .s24 .chip, .s25 .chip, .s27 .chip {
+    background: rgba(255,255,255,.72); border-color: rgba(16,32,44,.12);
+  }
+
+  /* 21 — two-word definition, dead center */
+  .s21 .copy {
+    position: absolute; left: 8vw; right: 8vw;
+    top: 8vh; bottom: calc(var(--safe-b) + 1.8vh);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; z-index: 5;
+  }
+  .s21 .ask {
+    font-size: 3.6vh; font-weight: 500; color: #24323c; line-height: 1.32;
+    max-width: 22ch;
+  }
+  .s21 .otro {
+    margin: 3vh 0 2.4vh;
+    font-size: clamp(52px, 16vh, 180px);
+    font-weight: 700; letter-spacing: -.05em; line-height: .88;
+    color: #0e4f4a;
+  }
+  .s21 .line { font-size: 3.2vh; color: #24323c; font-weight: 500; }
+  .s21 .mine {
+    margin-top: 1.8vh; font-size: 2.6vh; color: #1a6b72; font-weight: 600;
+  }
+
+  /* 24–25 — 70% of the page, quote blocks */
+  .s24 .copy, .s25 .copy {
+    position: absolute;
+    left: 15%; top: 15%;
+    width: 70%; height: 70%;
+    display: flex; flex-direction: column;
+    z-index: 5;
+  }
+  .s24 .copy { justify-content: space-between; }
+  .s25 .copy { justify-content: flex-start; gap: 3.2vh; }
+  .s24 p, .s25 p {
+    color: #24323c; font-weight: 500; line-height: 1.38;
+  }
+  .s24 p { font-size: 2.55vh; }
+  .s25 p { font-size: 4.9vh; line-height: 1.28; }
+  .s24 .quote, .s25 .quote {
+    border-left: 4px solid var(--acc);
+    padding-left: 1.5vw;
+  }
+  .s25 .quotes {
+    display: flex; flex-direction: column; gap: 2.4vh;
+  }
+  .s25 h1 {
+    text-align: center;
+    font-size: 5.2vh;
+    color: #10202c;
+    letter-spacing: -.03em;
+    line-height: 1.12;
+    font-weight: 700;
+    margin-bottom: 1.4vh;
+  }
+
+  /* 26 — photo left, copy matches photo height */
+  .s26 { background: #0b0f14; }
+  .s26 .pair {
+    position: absolute; inset: 8vh 4vw calc(var(--safe-b) + 2.2vh);
+    display: flex; align-items: flex-start; gap: 2.8vw;
+  }
+  .s26 .pair img {
+    width: 44vw; height: auto; flex: 0 0 44vw; display: block;
+  }
+  .s26 .copy {
+    flex: 1; min-width: 0;
+    height: calc(44vw * 1712 / 2384);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .s26 h1 {
+    font-size: 4.4vh; line-height: 1.05; letter-spacing: -.035em;
+  }
+  .s26 h1 span { color: var(--acc); }
+  .s26 p {
+    font-size: 3.7vh; line-height: 1.32; font-weight: 500; color: var(--dim);
+  }
+  .s26 .dignity { color: var(--acc); font-weight: 600; }
+
+  /* 27 — four principles, tap for modal */
+  .s27 .terms {
+    position: absolute;
+    left: 11vw; right: 11vw;
+    top: 11vh; bottom: calc(var(--safe-b) + 2.4vh);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2.4vh 2vw;
+    z-index: 5;
+  }
+  .s27 .term {
+    border: 1px solid rgba(16,32,44,.14);
+    background: rgba(255,255,255,.78);
+    color: #10202c;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: clamp(22px, 4.4vh, 58px);
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 2vh 1.6vw;
+    transition: background .2s ease, border-color .2s ease, transform .15s ease;
+  }
+  .s27 .term:hover {
+    background: rgba(255,255,255,.94);
+    border-color: #1a6b72;
+    color: #0e4f4a;
+    transform: translateY(-2px);
+  }
+  .s27 .modal {
+    position: absolute; inset: 0; z-index: 16;
+    display: none;
+  }
+  .s27 .modal.open { display: block; }
+  .s27 .modal-scrim {
+    position: absolute; inset: 0;
+    background: rgba(8, 16, 20, .78);
+    backdrop-filter: blur(6px);
+  }
+  .s27 .modal-card {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(74vw, 980px);
+    max-height: 68vh;
+    overflow: auto;
+    background: #f3faf7;
+    color: #10202c;
+    padding: 4.6vh 3.4vw 4.2vh;
+    border-left: 6px solid var(--acc);
+    box-shadow: 0 28px 90px rgba(0,0,0,.4);
+  }
+  .s27 .modal-card h2 {
+    font-size: 4.6vh;
+    color: #0e4f4a;
+    letter-spacing: -.03em;
+    margin-bottom: 2.2vh;
+  }
+  .s27 .modal-card p {
+    font-size: 2.85vh;
+    line-height: 1.42;
+    font-weight: 500;
+    color: #24323c;
+  }
+  .s27 .modal-x {
+    position: absolute; top: 1.2vh; right: 1.1vw;
+    width: 5vh; height: 5vh;
+    border: 0; background: transparent;
+    color: #1a6b72; font-size: 4.2vh; line-height: 1;
+    cursor: pointer;
+  }
+  .s27 .modal-x:hover { color: #10202c; }
 </style>
 </head>
 <body>
@@ -322,14 +545,14 @@
       <div class="cat">Cátedra de BIOÉTICA</div>
       <div class="uni">Ciencias de la Salud / UNER</div>
     </div>
-    <div class="chrome num">01 / 16</div>
+    <div class="chrome num">01 / 27</div>
     <div class="hero"><h1>BIOÉTICA</h1></div>
   </section>
 
   <section class="slide s2" data-n="2">
     <div class="bg"><img src="Fotos/Foto2.gif" alt="Práctico de Anatomía UNR 1970"></div>
     <div class="chrome chip">Cátedra de Bioética · Ciclo 2026</div>
-    <div class="chrome num">02 / 16</div>
+    <div class="chrome num">02 / 27</div>
     <div class="dock panel">
       <h2>1er Práctico de Anatomía</h2>
       <div class="sub">(hace 56 años) · Medicina / UNR 1970</div>
@@ -338,7 +561,7 @@
 
   <section class="slide s3" data-n="3" data-video="192lHE1kHMimtPK9OMSgqkzWI52K3w3wR">
     <div class="bg"><iframe data-drive title="Angelina Jordan" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">03 / 16</div>
+    <div class="chrome num">03 / 27</div>
     <div class="note panel">
       Introducción de 2 minutos de música/canto: abrir los sentidos al material gráfico y sonoro.
       <strong>Hoy, Angelina Jordan</strong>
@@ -348,13 +571,13 @@
 
   <section class="slide s4" data-n="4" data-video="1uYPQkeKircYs7rJJWdYrYUTqnxk1TfCi">
     <div class="bg"><iframe data-drive title="Video" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-    <div class="chrome num">04 / 16</div>
+    <div class="chrome num">04 / 27</div>
     <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
   </section>
 
   <section class="slide s5" data-n="5">
     <div class="bg"><img src="Fotos/Foto3.jpg" alt="The Agnew Clinic, Thomas Eakins"></div>
-    <div class="chrome num">05 / 16</div>
+    <div class="chrome num">05 / 27</div>
     <div class="author">
       <div class="panel">
         <div class="k">Before Bioethics</div>
@@ -370,7 +593,7 @@
 
   <section class="slide s6" data-n="6">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">06 / 16</div>
+    <div class="chrome num">06 / 27</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto5B.png" alt="Edades de la historia">
@@ -380,7 +603,7 @@
 
   <section class="slide s7" data-n="7">
     <div class="chrome chip">Cátedra de Bioética · UNER</div>
-    <div class="chrome num">07 / 16</div>
+    <div class="chrome num">07 / 27</div>
     <div class="stage">
       <h2>Edades de la Historia</h2>
       <img class="timeline" src="Fotos/Foto6.gif" alt="Línea de tiempo Prehistoria e Historia">
@@ -391,7 +614,7 @@
   <section class="slide s8" data-n="8">
     <div class="bg"><img src="Fotos/Foto7.gif" alt="Arte rupestre paleolítico"></div>
     <div class="chrome chip">Paleolítico</div>
-    <div class="chrome num">08 / 16</div>
+    <div class="chrome num">08 / 27</div>
     <div class="dock-l panel">
       <div class="k">Planeta</div>
       <h2>Un tiempo que necesitó un planeta para existir</h2>
@@ -403,7 +626,7 @@
   <section class="slide s9" data-n="9">
     <div class="bg"><img src="Fotos/Foto8.gif" alt="Big Bang"></div>
     <div class="chrome chip">Cosmología</div>
-    <div class="chrome num">09 / 16</div>
+    <div class="chrome num">09 / 27</div>
     <div class="dock-l panel">
       <div class="k">14.000 millones de años</div>
       <h2>El Big Bang: nace el universo</h2>
@@ -414,7 +637,7 @@
   <section class="slide s10" data-n="10">
     <div class="bg"><img src="Fotos/Foto9.jpeg" alt="Campo estelar"></div>
     <div class="chrome chip">Antigüedad</div>
-    <div class="chrome num">10 / 16</div>
+    <div class="chrome num">10 / 27</div>
     <div class="stats">
       <div class="stat panel">
         <div class="k">Big Bang · nace el universo</div>
@@ -432,7 +655,7 @@
   <section class="slide s11" data-n="11">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Origen</div>
-    <div class="chrome num">11 / 16</div>
+    <div class="chrome num">11 / 27</div>
     <div class="copy">
       <h2>Origen ancestral de la Bioética</h2>
       <p>La Bioética es una rama actual de la <strong>ética filosófica griega</strong> (siglo XX / años 70), que analizaba los <u>principios del bien y del mal en las acciones humanas</u>. Desde la Bioética hoy analizamos conductas en prestaciones de salud.</p>
@@ -442,7 +665,7 @@
   <section class="slide s12" data-n="12">
     <div class="bg"><img src="Fotos/Foto10.gif" alt=""></div>
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">12 / 16</div>
+    <div class="chrome num">12 / 27</div>
     <div class="copy">
       <h2>Orígenes en la Ética y Bioética</h2>
       <div class="era">Edad Antigua</div>
@@ -456,7 +679,7 @@
   <section class="slide s13" data-n="13">
     <div class="bg"><img src="Fotos/Foto11.jpeg" alt="Sócrates, Platón y Aristóteles"></div>
     <div class="chrome chip">Grecia antigua</div>
-    <div class="chrome num">13 / 16</div>
+    <div class="chrome num">13 / 27</div>
     <div class="copy panel">
       <h2>Los Filósofos griegos y la Ética</h2>
       <p>Sócrates, Platón y Aristóteles fueron los tres filósofos más influyentes de la Antigua Grecia y sentaron las bases de la Ética occidental.</p>
@@ -467,7 +690,7 @@
 
   <section class="slide s14" data-n="14">
     <div class="chrome chip">Edad Antigua</div>
-    <div class="chrome num">14 / 16</div>
+    <div class="chrome num">14 / 27</div>
     <div class="pair">
       <img src="Fotos/Foto12.png" alt="Hipócrates">
       <div class="copy">
@@ -481,7 +704,7 @@
 
   <section class="slide s15" data-n="15">
     <div class="chrome chip">Edad Media</div>
-    <div class="chrome num">15 / 16</div>
+    <div class="chrome num">15 / 27</div>
     <div class="pair">
       <img src="Fotos/Foto13.jpeg" alt="Santo Tomás de Aquino">
       <div class="copy">
@@ -494,7 +717,7 @@
 
   <section class="slide s16" data-n="16">
     <div class="chrome chip">Edad Moderna</div>
-    <div class="chrome num">16 / 16</div>
+    <div class="chrome num">16 / 27</div>
     <div class="pair">
       <div class="stack">
         <figure>
@@ -514,10 +737,152 @@
       </div>
     </div>
   </section>
+
+  <section class="slide s17" data-n="17">
+    <div class="chrome chip">1970</div>
+    <div class="chrome num">17 / 27</div>
+    <div class="pair">
+      <img src="Fotos/Foto16.jpg" alt="Van Rensselaer Potter">
+      <div class="copy">
+        <h2>1970: Potter propone el termino <span>BIOETICA</span></h2>
+        <p class="lead">…e inaugura los debates sobre la vida en todas sus formas y su relación con las personas</p>
+        <p>Van Rensselaer Potter, propone el termino “Bioetica” para resaltar dos ingredientes importantes para alcanzar la nueva sabiduría: el conocimiento biológico y los valores humanos. Piensaque la ética humana no puede separarse de la comprensión realista de la ecología en su sentido mas amplio, que se necesitan éticas …</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s18" data-n="18">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Definición</div>
+    <div class="chrome num">18 / 27</div>
+    <div class="copy">
+      <h2>LA ETICA</h2>
+      <p>La ética estudia la moral y determina qué es lo bueno y, desde este punto de vista, cómo se debe actuar. Es decir, es la teoría o la ciencia del comportamiento moral.</p>
+      <p>A diferencia del derecho, es autónoma, es decir, no es coactiva en el sentido de que pueda imponer un castigo o pena</p>
+      <p class="cite">“la búsqueda de la felicidad orientada por la razón", es la inteligencia aplicada a la conducta y se identifica con el bien obrar y el bien vivir”.</p>
+    </div>
+  </section>
+
+  <section class="slide s19" data-n="19">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Juicios</div>
+    <div class="chrome num">19 / 27</div>
+    <div class="copy">
+      <h2>LA ETICA</h2>
+      <p>Etica (Latín ethica "filosofía moral") proviene del griego "Ethikos" cuyo significado es Carácter. Tiene como objeto de estudio la moral y la acción humana. Su estudio se remonta a los orígenes de la filosofía moral en la Grecia clásica</p>
+      <p>La Ética elabora y verifica afirmaciones o juicios. Esta sentencia ética, juicio moral o declaración normativa es una afirmación que contendrá términos tales como 'malo', 'bueno', 'correcto', 'incorrecto', 'obligatorio', 'permitido', etc, referido a una acción o decisión.</p>
+      <p>Con sentencias éticas se está valorando moralmente a personas, situaciones, cosas o acciones. De este modo, se están estableciendo juicios morales cuando p.ej. se dice:</p>
+      <p class="ex">"Ese político no es honesto", "Ese hombre es impresentable", "Su presencia es loable", etc.</p>
+    </div>
+  </section>
+
+  <section class="slide s20" data-n="20">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Alcance</div>
+    <div class="chrome num">20 / 27</div>
+    <div class="copy">
+      <h2>LA BIOETICA</h2>
+      <p>Disciplina nueva, el término Bioética se usó por primera vez hace 50 años (Potter)</p>
+      <p>La Bioética es la rama de la ética que aspira a pro-veer los principios orientadores de la conducta humana en el campo biomédico.</p>
+      <p>Al considerarse la "conducta con la vida", incluir la vida no humana; los reinos animal y vegetal.</p>
+      <p class="stress">No debería limitarse solamente al campo médico<br>Considerar la Vida No Humana</p>
+    </div>
+  </section>
+
+  <section class="slide s21" data-n="21">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Dos palabras</div>
+    <div class="chrome num">21 / 27</div>
+    <div class="copy">
+      <p class="ask">Si tuviera que definir la Ética con 2 palabras sería …</p>
+      <div class="otro">el OTRO/A</div>
+      <p class="line">la Etica es "el/otro, la/otra"</p>
+      <p class="mine">(Mi conducta con el otro, es MI ETICA)</p>
+    </div>
+  </section>
+
+  <section class="slide s22" data-n="22">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Objeto de estudio</div>
+    <div class="chrome num">22 / 27</div>
+    <div class="copy">
+      <h1>BIOETICA</h1>
+      <h2>Objeto de estudio</h2>
+      <p class="quote">"La ETICA griega es una disciplina de la Filosofia que estudia el COMPORTAMIENTO HUMANO y su relacion con las nociones del BIEN y del MAL, la MORAL, el DEBER, la FELICIDAD y el BIENESTAR COMUN"</p>
+      <p>La BIOETICA "Abarca las cuestiones éticas acerca de la vida que surgen en las relaciones entre biología, medicina, política derecho, filosofía, sociología y antropología"</p>
+    </div>
+  </section>
+
+  <section class="slide s23" data-n="23" data-video="1VxS2-fNFF0v-GVvd6uVbZM0Uh7esUxpE">
+    <div class="bg"><iframe data-drive title="Ignacio Maglio" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <div class="chrome num">23 / 27</div>
+    <div class="note panel">
+      Ignacio Maglio
+      <strong>Fundación Huésped</strong>
+    </div>
+    <button type="button" class="vid-next" data-dir="1">Siguiente →</button>
+  </section>
+
+  <section class="slide s24" data-n="24">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Sujeto / objeto</div>
+    <div class="chrome num">24 / 27</div>
+    <div class="copy">
+      <p class="quote">A partir del Siglo XVII el modelo de la Medicina no habla de "una persona", sino de el órgano afectado. (un higado cirrotico, de un corazón dañado) es decir se paso del sujeto a un objeto (vinculado al sujeto).</p>
+      <p class="quote">A mi -ingresante de hace 50 años- cursando Anatomía, me pusieron el 1er día, un muerto cortado al medio y sus huesos en la mesa. En Fisiología, una rata y finalmente mucho mas adelante me pondrián frente a una persosa, un paciente...</p>
+      <p class="quote">La superespecialización, suele profundizar esta distancia con el paciente/persona. Ya nadie se altera por la ausencia del Humanismo...</p>
+    </div>
+  </section>
+
+  <section class="slide s25" data-n="25">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Cosificación</div>
+    <div class="chrome num">25 / 27</div>
+    <div class="copy">
+      <h1>DESHUMANIZACIÓN/ DESPERSONALIZACIÓN/COSIFICACION</h1>
+      <div class="quotes">
+        <p class="quote">En vuestra cotidianeidad oirán<br>a diario alguna expresión clásica de COSIFICACIÓN del paciente</p>
+        <p class="quote">"Dale Pepito! Traeme la vesicula de Cama 7, al quirofano, que me pierdo el partido de las 20 hs..."</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s26" data-n="26">
+    <div class="chrome chip">Conflictos humanos</div>
+    <div class="chrome num">26 / 27</div>
+    <div class="pair">
+      <img src="Fotos/Foto17.jpg" alt="Niños sobrevivientes de Auschwitz, enero 1945">
+      <div class="copy">
+        <h1>BIOETICA <span>&amp; CONFLICTOS HUMANOS</span></h1>
+        <p>La Bioética abarca las cuestiones éticas acerca de la vida que surgen en las relaciones entre biología, medicina, política, derecho, filosofía, sociología, antropología, teología y otros.</p>
+        <p class="dignity">El criterio ético fundamental que regula esta disciplina es el respeto al ser humano, a sus derechos inalienables, a su bien verdadero e integral: la dignidad de la persona.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s27" data-n="27">
+    <div class="bg"><img src="Fotos/Foto5.gif" alt=""></div>
+    <div class="chrome chip">Principios</div>
+    <div class="chrome num">27 / 27</div>
+    <div class="terms">
+      <button type="button" class="term" data-term="autonomia">AUTONOMIA</button>
+      <button type="button" class="term" data-term="beneficiencia">BENEFICIENCIA</button>
+      <button type="button" class="term" data-term="no-maleficiencia">NO MALEFICIENCIA</button>
+      <button type="button" class="term" data-term="justicia">JUSTICIA</button>
+    </div>
+    <div class="modal">
+      <div class="modal-scrim" data-close-modal></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button type="button" class="modal-x" data-close-modal aria-label="Cerrar">×</button>
+        <h2 id="modal-title"></h2>
+        <p id="modal-body"></p>
+      </div>
+    </div>
+  </section>
 </div>
 <div class="bar">
-  <div><b>Mg. Daniel De Michele</b></div>
-  <div class="inst">Ciclo Complementación Curricular<br>Ciencias de la Salud / UNER / Entre Ríos / 2026</div>
+  <div><b>Mg Daniel De Michele</b></div>
+  <div class="inst">Ciclo Complementacion Curricular<br>Ciencias de la Salud / UNER / Entre Ríos /2026</div>
 </div>
 
 <script>
@@ -527,6 +892,46 @@
   const bar = document.getElementById("bar");
   let i = 0;
   const preview = (id) => "https://drive.google.com/file/d/" + id + "/preview";
+
+  const defs = {
+    autonomia: {
+      title: "AUTONOMIA",
+      body: "La autonomia es la capacidad que tienen las personas para tomar sus decisiones y obrar en base a las mismas, incluso aunque sean perjudiciales para si mismo. La única excepción al respeto de la autonomía del individuo ocurre cuando por alguna circunstancia la persona NO puede tomar sus propias decisiones (menor de edad, incapaz, estado vegetativo)"
+    },
+    beneficiencia: {
+      title: "BENEFICIENCIA",
+      body: "Hacer el bien. Actuar siempre en beneficio de los demás. La Beneficencia puede colisionar con la autonomía (oposición del paciente ante un tratamiento útil)"
+    },
+    "no-maleficiencia": {
+      title: "NO MALEFICENCIA",
+      body: "Se puede resumir sencillamente como NO Hacer Daño a conciencia."
+    },
+    justicia: {
+      title: "JUSTICIA",
+      body: "Aplicando el principio de igualdad y reduciendo las causas de discriminación Justicia se considera como dar a cada uno lo que necesita y merece."
+    }
+  };
+
+  function modalEl() {
+    return document.querySelector(".slide.on .modal");
+  }
+  function modalOpen() {
+    const m = modalEl();
+    return !!(m && m.classList.contains("open"));
+  }
+  function closeModal() {
+    document.querySelectorAll(".modal.open").forEach((m) => {
+      m.classList.remove("open");
+    });
+  }
+  function openModal(key) {
+    const def = defs[key];
+    const m = modalEl();
+    if (!def || !m) return;
+    m.querySelector("#modal-title").textContent = def.title;
+    m.querySelector("#modal-body").textContent = def.body;
+    m.classList.add("open");
+  }
 
   function stopVideos() {
     document.querySelectorAll("iframe[data-drive]").forEach((f) => f.removeAttribute("src"));
@@ -538,6 +943,7 @@
     if (f) f.src = preview(id);
   }
   function go(n) {
+    closeModal();
     i = (n + slides.length) % slides.length;
     slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
     if (bar) bar.style.width = ((i + 1) / slides.length) * 100 + "%";
@@ -547,6 +953,20 @@
   }
 
   document.addEventListener("click", (e) => {
+    const closer = e.target.closest("[data-close-modal]");
+    if (closer) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal();
+      return;
+    }
+    const term = e.target.closest("[data-term]");
+    if (term) {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal(term.dataset.term);
+      return;
+    }
     const nav = e.target.closest("[data-dir]");
     if (!nav) return;
     e.preventDefault();
@@ -554,6 +974,11 @@
     go(i + Number(nav.dataset.dir));
   });
   document.addEventListener("keydown", (e) => {
+    if (modalOpen()) {
+      e.preventDefault();
+      if (e.key === "Escape") closeModal();
+      return;
+    }
     if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(i + 1); }
     else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); go(i - 1); }
     else if (e.key === "Home") go(0);
@@ -564,13 +989,15 @@
     }
   });
   document.getElementById("deck").addEventListener("click", (e) => {
-    if (e.target.closest("iframe, [data-dir], .note")) return;
+    if (e.target.closest("iframe, [data-dir], .note, [data-term], .modal")) return;
+    if (modalOpen()) return;
     if (slides[i].dataset.video) return;
     go(e.clientX / innerWidth < 0.22 ? i - 1 : i + 1);
   });
   let x0 = 0;
   document.addEventListener("touchstart", (e) => { x0 = e.changedTouches[0].clientX; }, { passive: true });
   document.addEventListener("touchend", (e) => {
+    if (modalOpen() || e.target.closest("[data-term], .modal")) return;
     const dx = e.changedTouches[0].clientX - x0;
     if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1);
   }, { passive: true });
